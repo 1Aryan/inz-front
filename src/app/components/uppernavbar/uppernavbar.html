@@ -1,36 +1,38 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand">Praca-Inz</a>
+      <a class="navbar-brand">BasketBlast</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Główna</a></li>
-      <li><a href="trenerzy">Trenerzy</a></li>
-      <li><a href="hale">Hale</a></li>
-      <li><a href="turnieje">Drużyny</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Turnieje
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Nadchodzące</a></li>
-          <li><a href="#">Zakonczone</a></li>
-          <li><a href="#">W trakcie</a></li>
-        </ul>
+      <button type="button" class="btn btn-light navbar-btn" routerLink="/">Główna</button>
+      <button type="button" class="btn btn-light navbar-btn" routerLink="/trenerzy">Trenerzy</button>
+      <button type="button" class="btn btn-light navbar-btn">Hale</button>
+      <button type="button" class="btn btn-light navbar-btn">Drużyny</button>
+      <button type="button" class="btn btn-light navbar-btn">Turnieje</button>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         
-     
-      <button type="button" class="btn btn-default navbar-btn" (click)="userModal.show()">
-        <span class="glyphicon glyphicon-log-in"></span>Zarejestruj</button>
-        
-        <li><button type="button" class="btn btn-default navbar-btn" (click)="authModal.show()">
+      <span class="btn-separator"></span>
+      
+      <button type="button" class="btn btn-light navbar-btn" *ngIf="!profileButton" (click)="userModal.show()">
+        <span class="glyphicon glyphicon-hand-right"></span>Zarejestruj</button>
+       
+
+        <button type="button" class="btn btn-light navbar-btn" *ngIf="!profileButton"(click)="authModal.show()">
         <span class="glyphicon glyphicon-log-in"></span>Zaloguj</button>
+         
+           <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton" >
+            <span class="glyphicon glyphicon-user"></span>{{userEmail}}</button>
+
+            <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton" (click)="logOut()">
+        <span class="glyphicon glyphicon-log-out"></span>Wyloguj</button>
+
         </ul>
   </div>
 </nav>
   
 
-
+<router-outlet></router-outlet>
 
 <user-register  #userModal> </user-register>
 

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 
 import {Welcome} from '../welcome/welcome';
-
+import {CoachList} from '../coach-list/coach-list';
 
 
 
@@ -10,6 +10,7 @@ import {Welcome} from '../welcome/welcome';
 
 const routes : Routes = [
 {path:'', component: Welcome},
+{path:'trenerzy', component: CoachList}
 
 ]
 @NgModule({

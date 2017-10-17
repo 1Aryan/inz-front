@@ -13,6 +13,9 @@ import {FlashMessagesModule} from 'angular2-flash-messages/module';
 import {UserService} from './_services/user.service';
 import {AuthService} from './_services/auth.service';
 import { HttpModule } from '@angular/http';
+import {StorageService} from './_services/storage.service';
+
+import {CoachList} from './components/coach-list/coach-list';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { HttpModule } from '@angular/http';
   	Welcome,
     Uppernavbar,
     UserRegister,
-    Authentication
+    Authentication,
+    CoachList,
   ],
   entryComponents: [
   ],
@@ -33,7 +37,7 @@ import { HttpModule } from '@angular/http';
     AppRouterModule,
     ModalModule.forRoot()
   ],
-  providers: [UserService,AuthService],
+  providers: [UserService,AuthService,StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,8 @@ import {UserLogin} from '../../_models/UserLogin';
 import {AuthService} from '../../_services/auth.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {User} from '../../_models/User';
+import {StorageService} from '../../_services/storage.service'
+
 @Component({ 
   selector: 'authentication',
   templateUrl: './authentication.html',
@@ -20,6 +22,7 @@ private userLogged:any;
 constructor(
 	private authService : AuthService,
 	private _flashMessagesService: FlashMessagesService,
+	private _storageService: StorageService,
 	){
 this.user = new UserLogin();
 }
@@ -36,34 +39,30 @@ submit(){
 this.authService.login(this.user)
 	.subscribe(
 		(success) => {
+			this._flashMessagesService.show("Zalogowano!",{ cssClass: 'alert-success', timeout: 1500 });
+			this.authService.getUser(success.id).subscribe((successLoggedUser) =>{
+
+			
 			this.hide();
 			this.userLogged= new User();
-			localStorage.setItem('id', success.id);
-			localStorage.setItem('name', success.name);
-			localStorage.setItem('lastname', success.lastname);
-			localStorage.setItem('email', success.email);
-			localStorage.setItem('role', success.usertype);
+			this.userLogged = successLoggedUser;
+
 			localStorage.setItem('token', success.token);
+			this._storageService.sendLoginSubject(this.userLogged);
 
-			console.log(localStorage.getItem('id'));
-			console.log(localStorage.getItem('name'));
-			console.log(localStorage.getItem('lastname'));
-			console.log(localStorage.getItem('email'));
-			console.log(localStorage.getItem('role'));
-			console.log(localStorage.getItem('token'));
-	
-
-			this._flashMessagesService.show("Zalogowano!",{ cssClass: 'alert-success', timeout: 1500 });
+			;
 		},
 		(error) => {
 			this._flashMessagesService.show("Błędne dane!",{ cssClass: 'alert-danger', timeout: 2000 });
-		}
-		)
-
-}
-
-
-}
+		});
+		
+		},
+		
+		(errorLoggedUser) => {
+			this._flashMessagesService.show("Błędne dane!",{ cssClass: 'alert-danger', timeout: 2000 });
+			
+			})
+		}}
 
 
 
