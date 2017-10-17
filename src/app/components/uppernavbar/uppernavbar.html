@@ -8,19 +8,17 @@
       <button type="button" class="btn btn-light navbar-btn" routerLink="/trenerzy">Trenerzy</button>
       <button type="button" class="btn btn-light navbar-btn">Hale</button>
       <button type="button" class="btn btn-light navbar-btn">Drużyny</button>
-      <button type="button" class="btn btn-light navbar-btn">Turnieje</button>
+      <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton">Turnieje</button>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         
       <span class="btn-separator"></span>
-      
+         <button type="button" class="btn btn-light navbar-btn" *ngIf="!profileButton"(click)="authModal.show()">
+        <span class="glyphicon glyphicon-log-in"></span>Zaloguj</button>
+
       <button type="button" class="btn btn-light navbar-btn" *ngIf="!profileButton" (click)="userModal.show()">
         <span class="glyphicon glyphicon-hand-right"></span>Zarejestruj</button>
-       
 
-        <button type="button" class="btn btn-light navbar-btn" *ngIf="!profileButton"(click)="authModal.show()">
-        <span class="glyphicon glyphicon-log-in"></span>Zaloguj</button>
-         
            <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton" >
             <span class="glyphicon glyphicon-user"></span>{{userEmail}}</button>
 
