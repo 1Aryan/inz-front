@@ -1,0 +1,26 @@
+
+<div bsModal #authModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+       <div class="modal-header">
+       <h4 class="modal-title">Zaloguj się</h4>
+       </div>
+          <div class="modal-body">        
+ <form>
+  <div class="form-group">
+    <label>Email:</label>
+    <input type="email" id="email" [(ngModel)]="user.email" placeholder="E-mail..."  [ngModelOptions]="{standalone: true}">
+  </div>
+  <div class="form-group">
+    <label>Hasło:</label>
+    <input type="password"  id="password" [(ngModel)]="user.password" placeholder="Hasło..."  [ngModelOptions]="{standalone: true}">
+  </div>
+
+  <button type="submit" (click)="submit()" class="btn btn-default">Zaloguj</button>
+
+</form>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,89 @@
+<flash-messages></flash-messages>
+
+<div bsModal #userModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+
+<form [formGroup]="form" novalidate>
+
+<h1>Zarejestruj się!</h1>
+<div class="form-group">
+<label for="title">Rola</label>
+<select  class="form-control"  id="role" name="role"  [(ngModel)]="id" (ngModelChange)="saveRole()"  [ngModelOptions]="{standalone: true}">
+   <option *ngFor="let role of roles" [ngValue]="role.id" >
+        {{role.name}}
+   </option>
+</select>
+</div>
+
+<div class="form-group">
+  <label for="title">Email</label>
+  <input type="text"  class="form-control" id="email" name="email" placeholder="E-mail"
+  formControlName="email">
+  <div class="alert alert-danger" role="alert" *ngIf="( form.get('email').touched || form.get('email').dirty) && 
+  form.get('email').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Podaj poprawny adres e-mail
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="title">Imię</label>
+  <input type="text"  class="form-control" id="name" name="name" placeholder="Imię" formControlName="name">
+   <div class="alert alert-danger" role="alert" *ngIf="( form.get('name').touched || form.get('name').dirty) && 
+  form.get('name').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Podaj poprawne imię
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="title">Nazwisko</label>
+  <input type="text" class="form-control" id="surname" name="surname" placeholder="Nazwisko" formControlName="lastname">
+   <div class="alert alert-danger" role="alert" *ngIf="( form.get('lastname').touched || form.get('lastname').dirty) && 
+  form.get('lastname').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Podaj poprawne nazwisko
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="title">Rok urodzenia</label>
+  <input type="text" class="form-control" id="year" name="year" placeholder="Rok urodzenia" formControlName="year">
+  <div class="alert alert-danger" role="alert" *ngIf="( form.get('year').touched || form.get('year').dirty) && 
+  form.get('year').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Podaj poprawny rok urodzenia
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="title">Telefon</label>
+  <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefon" formControlName="phone">
+  <div class="alert alert-danger" role="alert" *ngIf="( form.get('phone').touched || form.get('phone').dirty) && 
+  form.get('phone').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Podaj poprawny telefon
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="title">Hasło</label>
+  <input type="text" class="form-control" id="password" name="password" placeholder="Hasło" formControlName="password">
+   <div class="alert alert-danger" role="alert" *ngIf="( form.get('password').touched || form.get('password').dirty) && 
+  form.get('password').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Hasło powinno zawierać co najmniej 8 znaków!
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="title">Powtórz hasło</label>
+  <input type="text" class="form-control" id="password2" name="password2" placeholder="Powtórz hasło" formControlName="password2">
+</div>
+ <div class="alert alert-danger" role="alert" *ngIf=" form.get('password2').touched && form.errors">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Hasła nie są takie same !
+  </div>
+
+<button type="submit" (click)="submit()" [disabled]="!form.valid || id==null"  class="btn btn-default" >Zatwierdź</button>
+
+</form>
+
+
+</div>
+</div>
+</div>
