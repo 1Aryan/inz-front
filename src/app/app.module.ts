@@ -7,7 +7,7 @@ import { Welcome } from './components/welcome/welcome';
 import { AppComponent } from './app.component';
 
 import {UserRegister} from './components/register/user-register';
-
+import {AppRouterModule} from './components/router/router.module'
 import {Authentication} from './components/authentication/authentication';
 import {FlashMessagesModule} from 'angular2-flash-messages/module';
 import {UserService} from './_services/user.service';
@@ -30,6 +30,7 @@ import { HttpModule } from '@angular/http';
     ReactiveFormsModule,
     FlashMessagesModule,
     HttpModule,
+    AppRouterModule,
     ModalModule.forRoot()
   ],
   providers: [UserService,AuthService],
