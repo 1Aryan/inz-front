@@ -5,10 +5,10 @@
     </div>
     <ul class="nav navbar-nav">
       <button type="button" class="btn btn-light navbar-btn" routerLink="/">Główna</button>
-      <button type="button" class="btn btn-light navbar-btn" routerLink="/trenerzy">Trenerzy</button>
-      <button type="button" class="btn btn-light navbar-btn">Hale</button>
-      <button type="button" class="btn btn-light navbar-btn">Drużyny</button>
-      <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton">Turnieje</button>
+      <button type="button" class="btn btn-light navbar-btn" routerLink="/trenerzy" *ngIf="profileButton">Użytkownicy</button>
+      <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton">Drużyny</button>
+      <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton">Hale</button>
+      <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton">Mecze</button>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         
@@ -35,4 +35,3 @@
 <user-register  #userModal> </user-register>
 
 <authentication #authModal> </authentication>
-

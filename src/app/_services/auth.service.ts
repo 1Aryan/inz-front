@@ -39,6 +39,16 @@ export class AuthService {
     return this.http.get(url)
       .map(response => response.json());
   }
+ public activate(email: string){
+    let url = "http://localhost:8080/user/activate";
+    console.log("email: "+email);
+    let body = JSON.stringify(email);
+   let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
 
+ 
+    return this.http.post(url,body, {headers: headers})
+      .map(response => response.json())
+  }
 
 }

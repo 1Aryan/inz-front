@@ -9,7 +9,7 @@ import { passwordValidator } from '../../validators/password-validator';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'user-register',
   templateUrl: './user-register.html',
@@ -18,15 +18,14 @@ import {Observer} from 'rxjs/Observer';
 
 
 export class UserRegister implements OnInit{
+
 @ViewChild('userModal') public userModal:ModalDirective;
-
 id:number=null;
-
+verifyEmail:string;
   roles = [
        {id: 0,name: "Zawodnik"},
        {id: 1,name: "Trener"},
        {id: 2,name: "Sędzia"},
-       {id: 3,name: "Sanitariusz"},
      ];
 
 saveRole(){
@@ -38,8 +37,9 @@ private form: FormGroup;
 private user: User;
 constructor(
 private fb: FormBuilder,
-private playerService: UserService,
+private userService: UserService,
 private _flashMessagesService: FlashMessagesService,
+private router:Router,
 	){
 	this.user= new User();
 
@@ -54,16 +54,18 @@ show(){
 hide(){
   this.userModal.hide();
 }
-submit(){
 
+submit(){
+	this.verifyEmail=this.user.getEmail();
+	
 	if(this.form.valid){
-		console.log(this.user);
-		this.playerService.createPlayer(this.user)
+		
+		this.userService.createUser(this.user)
 		.subscribe(
 			success=>{
 				this.hide();
+				this._flashMessagesService.show("Zarejestrowany, sprawdź e-mail aby aktywować konto!",{ cssClass: 'alert-success', timeout: 2000 });
 				this.setFormValidators();
-				this._flashMessagesService.show("Konto założone!",{ cssClass: 'alert-success', timeout: 2000 });
 			},
 			error=>{
 				this._flashMessagesService.show("E-mail zajęty!",{ cssClass: 'alert-danger', timeout: 2000 });

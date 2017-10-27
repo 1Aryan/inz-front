@@ -9,7 +9,14 @@
     background: #ADADAD;
     margin: 0 10px;
         height: 50px;
-    width: 1px;
+    width: 2px;
 }
 
+.container-fluid{
+	
+  	
+    border-bottom: 5px solid #e69500 ;
+    color: black;
+   
 
+}

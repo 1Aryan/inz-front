@@ -18,9 +18,26 @@
   </div>
 
   <button type="submit" (click)="submit()" class="btn btn-default">Zaloguj</button>
-
+  <button type="submit" (click)="showActivateModal()" class="btn btn-default">Aktywuj konto</button>
 </form>
 </div>
+</div>
+</div>
+</div>
+
+
+
+
+<div bsModal #activateModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+
+
+  <label for="title">Aktywuj konto!</label>
+  <input type="text" #email  id="email" name="email" placeholder="E-mail...">
+
+  <button type="submit" (click)="activate(email.value)" class="btn btn-default">Wyślij link</button>
 </div>
 </div>
 </div>

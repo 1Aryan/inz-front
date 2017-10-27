@@ -5,7 +5,7 @@ import {AuthService} from '../../_services/auth.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {User} from '../../_models/User';
 import {StorageService} from '../../_services/storage.service'
-
+import {Router} from '@angular/router';
 @Component({ 
   selector: 'authentication',
   templateUrl: './authentication.html',
@@ -16,30 +16,35 @@ import {StorageService} from '../../_services/storage.service'
 export class Authentication {
 
 @ViewChild('authModal') public authModal:ModalDirective;
+@ViewChild('activateModal') public activateModal:ModalDirective;
 
 private user : UserLogin;
 private userLogged:any;
+
 constructor(
 	private authService : AuthService,
 	private _flashMessagesService: FlashMessagesService,
 	private _storageService: StorageService,
+	private router:Router,
 	){
 this.user = new UserLogin();
 }
 
-show(){
-  this.authModal.show();
-}
-hide(){
-  this.authModal.hide();
-}
+show(){this.authModal.show();}
+hide(){this.authModal.hide();}
+showActivateModal(){
+	this.hide();
+	this.activateModal.show();}
+hideActivateModal(){this.activateModal.hide();}
 
 submit(){
 	console.log(this.user);
 this.authService.login(this.user)
 	.subscribe(
 		(success) => {
+			this.router.navigate(['']);
 			this._flashMessagesService.show("Zalogowano!",{ cssClass: 'alert-success', timeout: 1500 });
+
 			this.authService.getUser(success.id).subscribe((successLoggedUser) =>{
 
 			
@@ -53,16 +58,30 @@ this.authService.login(this.user)
 			;
 		},
 		(error) => {
-			this._flashMessagesService.show("Błędne dane!",{ cssClass: 'alert-danger', timeout: 2000 });
+			this._flashMessagesService.show("Błędne dane lub nieaktywne konto, sprawdź email!",{ cssClass: 'alert-danger', timeout: 2000 });
 		});
 		
 		},
 		
 		(errorLoggedUser) => {
-			this._flashMessagesService.show("Błędne dane!",{ cssClass: 'alert-danger', timeout: 2000 });
+			this._flashMessagesService.show("Błędne dane lub nieaktywne konto, sprawdź email!",{ cssClass: 'alert-danger', timeout: 2000 });
 			
 			})
-		}}
+		}
 
+activate(email: string){
+this.authService.activate(email)
+.subscribe(
+		(success)=>{
+			this.router.navigate(['']);
+			this._flashMessagesService.show("Link aktywacyjny został wysłany na podany adres e-mail",{ cssClass: 'alert-success', timeout: 1500 });
+			this.hideActivateModal();
+		},
+		(error)=>{
+			console.log(error.json().email);
+				this._flashMessagesService.show("Email " + error.json().email + " nie istnieje",{ cssClass: 'alert-danger', timeout: 2000 });
+		}
+	)
 
-
+}
+}
