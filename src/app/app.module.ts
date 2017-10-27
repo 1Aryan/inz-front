@@ -15,7 +15,6 @@ import {AuthService} from './_services/auth.service';
 import { HttpModule } from '@angular/http';
 import {StorageService} from './_services/storage.service';
 
-import {CoachList} from './components/coach-list/coach-list';
 
 @NgModule({
   declarations: [
@@ -24,7 +23,6 @@ import {CoachList} from './components/coach-list/coach-list';
     Uppernavbar,
     UserRegister,
     Authentication,
-    CoachList,
   ],
   entryComponents: [
   ],
