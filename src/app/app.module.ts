@@ -14,8 +14,8 @@ import {UserService} from './_services/user.service';
 import {AuthService} from './_services/auth.service';
 import { HttpModule } from '@angular/http';
 import {StorageService} from './_services/storage.service';
-
-
+import {UserList} from './components/userlist/userlist'
+import {SearchUserService} from './_services/searchUser.service';
 @NgModule({
   declarations: [
      AppComponent,
@@ -23,6 +23,7 @@ import {StorageService} from './_services/storage.service';
     Uppernavbar,
     UserRegister,
     Authentication,
+    UserList,
   ],
   entryComponents: [
   ],
@@ -35,7 +36,7 @@ import {StorageService} from './_services/storage.service';
     AppRouterModule,
     ModalModule.forRoot()
   ],
-  providers: [UserService,AuthService,StorageService],
+  providers: [SearchUserService,UserService,AuthService,StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

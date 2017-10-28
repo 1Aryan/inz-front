@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-4"></div><div class="col-md-4">
+   <div class="panel panel-default">
+        <div class="panel-heading">Przeglądaj użytkowników!</div>
+
+  </div>
+  <div class="col-md-4"></div>
+</div>
+</div>
+
+
+
+<div class="row">
+ 
+  <div class="col-md-4">
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">Panel wyszukiwania</div>
+        <div class="panel-body">
+<label>Imię</label><br>
+<input [(ngModel)]="searchUser.name" placeholder="Imię..."><br>
+<label>Email</label><br>
+<input [(ngModel)]="searchUser.email" placeholder="Email..."><br>
+        <label>Rola</label>
+<select  class="form-control"  id="role" name="role"  [(ngModel)]="id" (ngModelChange)="saveRole()">
+   <option *ngFor="let role of roles" [ngValue]="role.id" >
+        {{role.name}}
+   </option>
+</select>
+<button type="submit" (click)="searchForUsers()" class="btn btn-default" >Szukaj</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 ">
+
+  <div class="panel panel-info" > 
+    <div class="panel-heading">Znalezieni użytkownicy ({{totalUsers}})</div>
+    </div>
+    <div class="panel panel-default" *ngFor="let result of results">  
+    <div class="panel-heading">
+    <button class="btn btn-primary">[{{result.role}}] {{result.name}} {{result.lastname}}</button></div>
+     <div class="panel-body"  >
+  
+  <p> Rok urodzenia : {{result.year}}</p>
+  <p> E-mail : {{result.email}} </p>
+  <p> Telefon : {{result.phone}} </p> 
+
+</div></div>
+  
+</div>
