@@ -44,6 +44,7 @@ subscribeUser(){
 			this.userEmail = account.email;
 			this.loggedUser = account;
 			this.profileButton = true;
+			console.log("loggedUser");
 		}
 		
 		}

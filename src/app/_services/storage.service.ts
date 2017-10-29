@@ -18,6 +18,7 @@ export class StorageService {
     this.subject.next(null);
   }
   getLoginSubject(): Observable<any>{
+    console.log(this.subject);
   	return this.subject.asObservable();
   }
   clearLoginSubject(){

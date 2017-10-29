@@ -20,6 +20,8 @@ import {SearchUserService} from './_services/searchUser.service';
 import {PagerService} from './_services/pager.service';
 import {AddHall} from './components/hall/addhall/addhall';
 import {HallList} from './components/hall/halllist/halllist';
+import {Profile} from './components/profile/profile';
+
 @NgModule({
   declarations: [
      AppComponent,
@@ -30,6 +32,7 @@ import {HallList} from './components/hall/halllist/halllist';
     UserList,
     AddHall,
     HallList,
+    Profile,
   ],
   entryComponents: [
   ],

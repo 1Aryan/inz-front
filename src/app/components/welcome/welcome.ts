@@ -1,5 +1,5 @@
 import { Component,OnInit,ViewChild} from '@angular/core';
-import {StorageService} from '../../_services/storage.service'
+import {StorageService} from '../../_services/storage.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ModalDirective } from 'ngx-bootstrap';
 import {AddHall} from '../hall/addhall/addhall';

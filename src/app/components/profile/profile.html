@@ -1,0 +1,37 @@
+<div class="row">
+ 
+  <div class="col-md-2">
+    <div class="row">
+      <div class="panel panel-default" >
+        <div class="panel-heading">Podaj dodatkowe informacje!</div>
+        <div class="panel-body">
+<label>Miasto</label><br>
+<input  placeholder="np. Warszawa"><br>
+<label>Wzrost</label><br>
+<input><br>
+<label>Waga</label><br>
+<input><br>
+<label>Zasięg ręki</label><br>
+<input><br>
+<label>Wyskok</label><br>
+<input><br>
+<label>Pozycja</label><br>
+<select    [(ngModel)]="id" (ngModelChange)="saveRole()" >
+   <option *ngFor="let role of roles" [ngValue]="role.id" >
+        {{role.name}}
+   </option>
+</select>
+<br>
+
+<button type="submit" class="btn btn-default" >Edytuj</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 ">cos</div>
+
+  <div class="col-md-4 ">wiecej czegos</div>
+
+   <div class="col-md-2 ">jeszcze wiecej czegos</div>
+  
+
