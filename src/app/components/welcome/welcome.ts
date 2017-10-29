@@ -12,9 +12,11 @@ export class Welcome implements OnInit  {
 
 @ViewChild('hallModal') public hallModal:AddHall;
 @ViewChild('contactModal') public contactModal:ModalDirective;
+@ViewChild('regulationsModal') public regulationsModal:ModalDirective;
+
 private profileButton: boolean;
 private userEmail: string;
-loggedUser: any;
+
 subscription: Subscription;
 
 
@@ -31,10 +33,9 @@ ngOnInit(){
 	this.subscribeUser();
 }
 
-showHallModal(){this.hallModal.show();}
 hideHallModal(){this.hallModal.hide();}
-showContactModal(){this.contactModal.show();}
 hideContactModal(){this.contactModal.hide();}
+hideRegulationsModal(){this.regulationsModal.hide();}
 
 subscribeUser(){
 	this.subscription = this.storageService.getLoginSubject().subscribe(

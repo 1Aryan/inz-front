@@ -19,6 +19,7 @@ import {UserList} from './components/userlist/userlist'
 import {SearchUserService} from './_services/searchUser.service';
 import {PagerService} from './_services/pager.service';
 import {AddHall} from './components/hall/addhall/addhall';
+import {HallList} from './components/hall/halllist/halllist';
 @NgModule({
   declarations: [
      AppComponent,
@@ -28,6 +29,7 @@ import {AddHall} from './components/hall/addhall/addhall';
     Authentication,
     UserList,
     AddHall,
+    HallList,
   ],
   entryComponents: [
   ],

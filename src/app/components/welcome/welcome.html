@@ -1,31 +1,59 @@
+<link href='https://fonts.googleapis.com/css?family=Gruppo' rel='stylesheet'>
+
+
+
 <flash-messages></flash-messages>
+<body>
+
 <div class="text-center">
 <h1> Witamy w BasketBlast!</h1>
 <p> Zaloguj się aby przeglądać serwis w pełnym zakresie !</p>
+
 </div>
-<hr/>
+
 <div class="row">
 	<div class="col-md-4"></div>
   <div class="col-md-4 text-center">
-    <div class="thumbnail">
-        <img src="http://cdn.sqhk.co/connor/2016/3/jhGjeEK/IMG_1345.JPG" alt="Lights" style="width:100%">
-        <div class="caption">
-          <button class="btn btn-primary" [disabled]="!profileButton" (click)="hallModal.show()" allign="center" >Dodaj halę</button>
-        </div>
-
-    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Panel użytkownika</div>
+        <div class="pane-body"><button class="btn btn-light" (click)="regulationsModal.show()">Regulamin</button></div>
+      
+        <button class="btn btn-light" (click)="contactModal.show()" [disabled]="!profileButton">Kontakt z administratorem</button>
+        <br>
+        <button class="btn btn-light" [disabled]="!profileButton" (click)="hallModal.show()" allign="center" >Dodaj halę</button>
+  </div>
   </div>
 <div class="col-md-4 text-center">
- <div class="panel panel-default">
-        <div class="panel-heading">Centrum pomocy</div>
-        <div class="pane-body"><button class="btn btn-primary">Regulamin</button></div>
-        <button class="btn btn-info" (click)="showContactModal()" [disabled]="!profileButton">Kontakt z administratorem</button>
-  </div>
+
  </div>
 </div>
- <hr/>
+<hr/>
  <div class="text-center">
  	<h1> Aktualności</h1>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+
+<div bsModal #regulationsModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+
+      <div class="panel panel-default" >
+        <div class="panel-heading">Regulamin</div>
+        <div class="panel-body">
+   <p> 1. Nie będziesz miał bogów cudzych przede mną</p><hr/>
+   <p> 2. Korzystaj z serwisu rozważnie </p>
+    </div>
+<div class="panel-footer">
+  <button type="submit" (click)="regulationsModal.hide()" class="btn btn-default">Zamknij</button>
+</div>
+
+</div>
+
+  
+</div>
+</div>
 </div>
 
 
@@ -33,14 +61,22 @@
 mySmallModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm">
 <div class="modal-content">
-<textarea rows="5" placeholder="Twoja wiadomość..."></textarea>
 
+
+      <div class="panel panel-default" >
+        <div class="panel-heading">Kontakt z administracją</div>
+        <div class="panel-body">
+    <textarea rows="5" placeholder="Twoja wiadomość..."></textarea>
+    </div>
+<div class="panel-footer">
   <button type="submit" (click)="sendMsg()" class="btn btn-default">Wyślij</button>
 </div>
-</div>
+
 </div>
 
-
+</div>
+</div>
+</div>
 
 <add-hall #hallModal> </add-hall>
 
