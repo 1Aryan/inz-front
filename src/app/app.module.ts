@@ -11,11 +11,14 @@ import {AppRouterModule} from './components/router/router.module'
 import {Authentication} from './components/authentication/authentication';
 import {FlashMessagesModule} from 'angular2-flash-messages/module';
 import {UserService} from './_services/user.service';
+import {HallService} from './_services/hall.service';
 import {AuthService} from './_services/auth.service';
 import { HttpModule } from '@angular/http';
 import {StorageService} from './_services/storage.service';
 import {UserList} from './components/userlist/userlist'
 import {SearchUserService} from './_services/searchUser.service';
+import {PagerService} from './_services/pager.service';
+import {AddHall} from './components/hall/addhall/addhall';
 @NgModule({
   declarations: [
      AppComponent,
@@ -24,6 +27,7 @@ import {SearchUserService} from './_services/searchUser.service';
     UserRegister,
     Authentication,
     UserList,
+    AddHall,
   ],
   entryComponents: [
   ],
@@ -36,7 +40,7 @@ import {SearchUserService} from './_services/searchUser.service';
     AppRouterModule,
     ModalModule.forRoot()
   ],
-  providers: [SearchUserService,UserService,AuthService,StorageService],
+  providers: [HallService,PagerService,SearchUserService,UserService,AuthService,StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
