@@ -78,8 +78,8 @@ this.authService.activate(email)
 			this.hideActivateModal();
 		},
 		(error)=>{
-			console.log(error.json().email);
-				this._flashMessagesService.show("Email " + error.json().email + " nie istnieje",{ cssClass: 'alert-danger', timeout: 2000 });
+
+				this._flashMessagesService.show("Email nie istnieje",{ cssClass: 'alert-danger', timeout: 2000 });
 		}
 	)
 
