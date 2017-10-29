@@ -1,0 +1,63 @@
+<flash-messages></flash-messages>
+
+<div bsModal #hallModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+
+<form [formGroup]="form" novalidate>
+
+
+<div class="form-group">
+  <label for="title">Adres</label>
+  <input type="text"  class="form-control" id="adress" name="adress" placeholder="np. Złota"
+  formControlName="adress">
+  <div class="alert alert-danger" role="alert" *ngIf="( form.get('adress').touched || form.get('adress').dirty) && form.get('adress').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" ></span>Podaj poprawny adres (np. Złota 5)
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label for="title">Number budynku</label>
+  <input type="text"  class="form-control" id="number" name="number" placeholder="np. 5"
+  formControlName="number">
+  <div class="alert alert-danger" role="alert" *ngIf="( form.get('number').touched || form.get('number').dirty) && form.get('number').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" ></span>Podaj poprawny adres (np. Złota 5)
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label for="title">Miasto</label>
+  <input type="text"  class="form-control" id="city" name="adrcityess" placeholder="np. Warszawa"
+  formControlName="city">
+  <div class="alert alert-danger" role="alert" *ngIf="( form.get('city').touched || form.get('city').dirty) && form.get('city').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" ></span>Podaj poprawne miasto!
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="title">Koszt wynajmu/godz.</label>
+  <input type="text" class="form-control" id="price" name="price" formControlName="price">
+   <div class="alert alert-danger" role="alert" *ngIf="( form.get('price').touched || form.get('price').dirty) && form.get('price').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" ></span>Podaj poprawny koszt!
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label for="title">Krótki opis</label>
+  <input type="text" class="form-control" id="description" name="description" formControlName="description">
+   <div class="alert alert-danger" role="alert" *ngIf="( form.get('description').touched || form.get('description').dirty) && form.get('description').invalid">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" ></span>1-50 znaków!
+  </div>
+</div>
+
+<button type="submit" (click)="addHall()" [disabled]="!form.valid" class="btn btn-primary" >Zatwierdź</button>
+
+</form>
+
+
+</div>
+</div>
+</div>

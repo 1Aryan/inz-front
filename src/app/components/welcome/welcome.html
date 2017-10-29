@@ -1,0 +1,54 @@
+<flash-messages></flash-messages>
+<div class="text-center">
+<h1> Witamy w BasketBlast!</h1>
+<p> Zaloguj się aby przeglądać serwis w pełnym zakresie !</p>
+</div>
+<hr/>
+<div class="row">
+	<div class="col-md-4"></div>
+  <div class="col-md-4 text-center">
+    <div class="thumbnail">
+        <img src="http://cdn.sqhk.co/connor/2016/3/jhGjeEK/IMG_1345.JPG" alt="Lights" style="width:100%">
+        <div class="caption">
+          <button class="btn btn-primary" [disabled]="!profileButton" (click)="hallModal.show()" allign="center" >Dodaj halę</button>
+        </div>
+
+    </div>
+  </div>
+<div class="col-md-4 text-center">
+ <div class="panel panel-default">
+        <div class="panel-heading">Centrum pomocy</div>
+        <div class="pane-body"><button class="btn btn-primary">Regulamin</button></div>
+        <button class="btn btn-info" (click)="showContactModal()" [disabled]="!profileButton">Kontakt z administratorem</button>
+  </div>
+ </div>
+</div>
+ <hr/>
+ <div class="text-center">
+ 	<h1> Aktualności</h1>
+</div>
+
+
+<div bsModal #contactModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<textarea rows="5" placeholder="Twoja wiadomość..."></textarea>
+
+  <button type="submit" (click)="sendMsg()" class="btn btn-default">Wyślij</button>
+</div>
+</div>
+</div>
+
+
+
+<add-hall #hallModal> </add-hall>
+
+
+
+
+
+
+
+
+

@@ -17,6 +17,7 @@ export class UserList implements OnInit{
  role:any;
  results: any[]
  totalUsers: any;
+ //totalPages: any;
  private searchUser: SearchUser;
 
   roles = [
@@ -31,7 +32,7 @@ saveRole(){
  this.searchUser.role = this.roles[this.id].name;
 }
 ngOnInit(){
-	
+	this.searchForUsers();
 }
 constructor(private _searchUserService: SearchUserService,){
 	this.searchUser = new SearchUser();
@@ -43,6 +44,7 @@ this._searchUserService.searchForUsers(this.searchUser)
 	.subscribe(
 		(success)=>{
 			this.totalUsers = this._searchUserService.totalUsers;
+			//this.totalPages = Math.ceil((parseInt(this._searchUserService.totalUsers)/10));
 			this.results = success;
 		},
 		(error)=>{
