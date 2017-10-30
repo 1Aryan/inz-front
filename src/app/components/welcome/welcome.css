@@ -19,7 +19,11 @@ hr {
 h1,p {
  font-family: 'Gruppo';font-size: 30px;
 }
-
+.btn-light{
+	padding-top: 5px;
+	margin-bottom: 2px;
+	margin-top:2px;
+}
 .btn-light:hover{
 
     border-color: black;

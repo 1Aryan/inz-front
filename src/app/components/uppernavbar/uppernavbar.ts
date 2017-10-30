@@ -38,6 +38,7 @@ this.subscribeUser();
 logOut(){
 	this.storageService.announceLogout();
 	this.profileButton = false;
+	this.router.navigate(['/']);
 }
 
 
