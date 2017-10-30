@@ -1,27 +1,16 @@
 import {Injectable} from "@angular/core";
-import { Observable} from "rxjs";
- import {Subject} from "rxjs/Subject";
-
+import {BehaviorSubject, Observable} from "rxjs";
 @Injectable()
 export class StorageService {
   
+  public static Login : BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public static LoginStream$ : Observable<any> = StorageService.Login.asObservable();
 
-  private  subject = new Subject<any>();
-
-
-  sendLoginSubject(arg : any) {
-    this.subject.next(arg);
+ announceLogin(arg : any) {
+    StorageService.Login.next(arg);
   }
 
-  sendLogoutSubject() {
-    this.subject.next(false);
-    this.subject.next(null);
-  }
-  getLoginSubject(): Observable<any>{
-    console.log(this.subject);
-  	return this.subject.asObservable();
-  }
-  clearLoginSubject(){
-  	this.subject.next(null);
+  announceLogout() {
+    StorageService.Login.next(null);
   }
 }

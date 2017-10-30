@@ -1,18 +1,16 @@
 import { Component,ViewChild,OnInit,ViewContainerRef} from '@angular/core';
 import {ModalDirective,ModalModule} from 'ngx-bootstrap/modal';
-import {StorageService} from '../../_services/storage.service';
+import {StorageService} from '../../../_services/storage.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'profile',
-  templateUrl: './profile.html',
-  styleUrls: ['./profile.css']
+  selector: 'player-profile',
+  templateUrl: './player-profile.html',
+  styleUrls: ['./player-profile.css']
 })
-export class Profile implements OnInit {
+export class PlayerProfile implements OnInit {
 id:number=null;
-verifyEmail:string;
-subscription: Subscription;
-
+loggedUserRole: any;
   roles = [
        {id: 0,name: "1 - Rozgrywający"},
        {id: 1,name: "2 - Rzucający obronca"},
@@ -29,20 +27,16 @@ saveRole(){
 
 ngOnInit(){
 	this.subscribeUser();
-	console.log("ngoninit profile");
 }
 
 subscribeUser(){
-	this.subscription = this.storageService.getLoginSubject().subscribe(
+	StorageService.LoginStream$.subscribe(
 		(account) => {
 			if(account != null){
-			console.log(account.email);
-			console.log(account);
-			console.log("cos");
+			this.loggedUserRole=account.role;
+			console.log(this.loggedUserRole);
 		}
-		else{
-			console.log("cos nie tak");
-		}
+		
 		}
 		)
 }

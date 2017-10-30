@@ -17,8 +17,6 @@ export class Welcome implements OnInit  {
 private profileButton: boolean;
 private userEmail: string;
 
-subscription: Subscription;
-
 
 
 constructor(
@@ -38,7 +36,7 @@ hideContactModal(){this.contactModal.hide();}
 hideRegulationsModal(){this.regulationsModal.hide();}
 
 subscribeUser(){
-	this.subscription = this.storageService.getLoginSubject().subscribe(
+	StorageService.LoginStream$.subscribe(
 		(account) => {
 			if(account != null){
 			this.profileButton = true;

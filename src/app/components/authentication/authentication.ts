@@ -51,7 +51,9 @@ this.authService.login(this.user)
 			this.hide();
 			this.userLogged= new User();
 			this.userLogged = successLoggedUser;
-			this._storageService.sendLoginSubject(this.userLogged);
+
+			localStorage.setItem('token', success.token);
+			this._storageService.announceLogin(this.userLogged);
 
 			;
 		},

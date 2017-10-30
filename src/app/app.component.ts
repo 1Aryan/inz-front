@@ -8,11 +8,12 @@ import {Router} from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'Praca inzynierska';
 
-  constructor(private router:Router){
+  constructor(private router:Router, private Storage){
 
   }
   ngOnInit(){
   	this.router.navigate(['']);
-
   }
+
+
 }

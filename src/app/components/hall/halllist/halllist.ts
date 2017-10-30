@@ -26,12 +26,12 @@ constructor(private hallService: HallService){
 }
 
 searchForHalls(){
-	
+
 this.hallService.searchForHalls(this.hall)
 	.subscribe(
 		(success)=>{
 			this.totalHalls = this.hallService.totalHalls;
-			//this.totalPages = Math.ceil((parseInt(this._searchUserService.totalUsers)/10));
+
 			this.results = success;
 		},
 		(error)=>{
