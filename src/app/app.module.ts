@@ -45,7 +45,7 @@ import {PlayerProfile} from './components/profile/player-profile/player-profile'
     AppRouterModule,
     ModalModule.forRoot()
   ],
-  providers: [HallService,PagerService,SearchUserService,UserService,AuthService,StorageService],
+  providers: [StorageService,HallService,PagerService,SearchUserService,UserService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
