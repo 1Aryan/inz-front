@@ -24,7 +24,7 @@ import {PlayerProfile} from './components/profile/player-profile/player-profile'
 
 @NgModule({
   declarations: [
-     AppComponent,
+    AppComponent,
   	Welcome,
     Uppernavbar,
     UserRegister,
