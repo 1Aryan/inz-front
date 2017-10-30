@@ -19,15 +19,23 @@ import {UserList} from './components/userlist/userlist'
 import {SearchUserService} from './_services/searchUser.service';
 import {PagerService} from './_services/pager.service';
 import {AddHall} from './components/hall/addhall/addhall';
+import {HallList} from './components/hall/halllist/halllist';
+import {PlayerProfile} from './components/profile/player-profile/player-profile';
+import {CoachProfile} from './components/profile/coach-profile/coach-profile';
+import {RefreeProfile} from './components/profile/refree-profile/refree-profile';
 @NgModule({
   declarations: [
-     AppComponent,
+    AppComponent,
   	Welcome,
     Uppernavbar,
     UserRegister,
     Authentication,
     UserList,
     AddHall,
+    HallList,
+    PlayerProfile,
+    CoachProfile,
+    RefreeProfile,
   ],
   entryComponents: [
   ],
@@ -40,7 +48,7 @@ import {AddHall} from './components/hall/addhall/addhall';
     AppRouterModule,
     ModalModule.forRoot()
   ],
-  providers: [HallService,PagerService,SearchUserService,UserService,AuthService,StorageService],
+  providers: [StorageService,HallService,PagerService,SearchUserService,UserService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

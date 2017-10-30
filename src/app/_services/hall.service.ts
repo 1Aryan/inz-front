@@ -4,7 +4,7 @@ import { Hall } from '../_models/hall';
 import { URLSearchParams } from '@angular/http';
 @Injectable()
 export class HallService {
- 
+ totalHalls:any;
 
   constructor(private http: Http){}
 
@@ -21,6 +21,23 @@ export class HallService {
       .map(response => response.json())
 
    }
+
+
+  public searchForHalls(hall : Hall){
+    let url = "http://localhost:8080/search/halls";
+    let body = JSON.stringify(hall);
+    console.log(body);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(url, body, {headers: headers})
+.map((res) => { 
+       this.totalHalls = res.headers.get('total');
+       return res.json();
+ } )
+  
+  }
+
 
   }
 

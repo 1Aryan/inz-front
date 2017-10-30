@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-4"></div><div class="col-md-4">
+
+   <div class="panel panel-default">
+        <div class="panel-heading">Przeglądaj hale!</div>
+
+  </div>
+  <div class="col-md-4"></div>
+</div>
+</div>
+
+
+
+<div class="row">
+ 
+  <div class="col-md-4">
+    <div class="row">
+      <div class="panel panel-default" >
+        <div class="panel-heading">Panel wyszukiwania</div>
+        <div class="panel-body">
+<label>Miasto</label><br>
+<input (keyup.enter)="searchForHalls()" [(ngModel)]="hall.city" placeholder="np. Warszawa"><br>
+<label>Adres</label><br>
+<input (keyup.enter)="searchForHalls()" [(ngModel)]="hall.adress" placeholder="np. Agawy"><br>
+<label>Numer budynku</label><br>
+<input (keyup.enter)="searchForHalls()" [(ngModel)]="hall.number"><br>
+
+
+<button type="submit"  (click)="searchForHalls()" class="btn btn-default" >Szukaj</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 ">
+
+  <div class="panel panel-info" > 
+    <div class="panel-heading">Znalezione hale ({{totalHalls}})</div>
+    </div>
+    <div class="panel panel-default" *ngFor="let result of results">  
+    <div class="panel-heading">
+    <button class="btn btn-primary">[{{result.city}}] </button></div>
+     <div class="panel-body"  >
+  
+  <p> <span style="color:#0000e6; font-size: 120% ">Adres : </span>{{result.adress}} {{result.number}}</p>
+  <p>  <span style="color:#0000e6; font-size: 120% ">Opłata/godz. :</span> {{result.price}} zł </p>
+  <p *ngIf="result.description">  <span style="color:#0000e6; font-size: 120% ">Opis:</span> {{result.description}} </p>
+
+
+</div></div>
+  
+</div>

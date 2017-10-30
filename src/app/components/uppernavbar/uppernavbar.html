@@ -1,3 +1,5 @@
+<html>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -7,11 +9,11 @@
       <button type="button" class="btn btn-light navbar-btn" routerLink="/">Główna</button>
       <button type="button" class="btn btn-light navbar-btn" routerLink="/uzytkownicy" *ngIf="profileButton">Użytkownicy</button>
       <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton">Drużyny</button>
-      <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton">Hale</button>
+      <button type="button" class="btn btn-light navbar-btn" routerLink="/hale" *ngIf="profileButton">Hale</button>
       <button type="button" class="btn btn-light navbar-btn" *ngIf="profileButton">Mecze</button>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-        
+
       <span class="btn-separator"></span>
          <button type="button" class="btn btn-light navbar-btn" *ngIf="!profileButton"(click)="authModal.show()">
         <span class="glyphicon glyphicon-log-in"></span>Zaloguj</button>

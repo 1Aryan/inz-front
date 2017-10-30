@@ -1,26 +1,32 @@
 body, html {
     height: 100%;
     margin: 0;
+background: #ADA996;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
-.bg {
-    /* The image used */
-    background-image: url("http://www.surebety.pl/images/Bukmacherka/koszykowka500x375.jpg");
-padding: 1300px 0px 0px 0px;
-    /* Full height */
-    height: 100%; 
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-
 hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
+    border-top: 1px solid black;
+    margin: 2px 0;
     padding: 0;
+
 }
+
+h1,p {
+ font-family: 'Gruppo';font-size: 30px;
+}
+.btn-light{
+	padding-top: 5px;
+	margin-bottom: 2px;
+	margin-top:2px;
+}
+.btn-light:hover{
+
+    border-color: black;
+}
+
+

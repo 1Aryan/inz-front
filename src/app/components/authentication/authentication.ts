@@ -32,17 +32,18 @@ this.user = new UserLogin();
 
 show(){this.authModal.show();}
 hide(){this.authModal.hide();}
+
 showActivateModal(){
 	this.hide();
 	this.activateModal.show();}
 hideActivateModal(){this.activateModal.hide();}
 
 submit(){
-	console.log(this.user);
+
 this.authService.login(this.user)
 	.subscribe(
 		(success) => {
-			this.router.navigate(['']);
+			
 			this._flashMessagesService.show("Zalogowano!",{ cssClass: 'alert-success', timeout: 1500 });
 
 			this.authService.getUser(success.id).subscribe((successLoggedUser) =>{
@@ -53,7 +54,7 @@ this.authService.login(this.user)
 			this.userLogged = successLoggedUser;
 
 			localStorage.setItem('token', success.token);
-			this._storageService.sendLoginSubject(this.userLogged);
+			this._storageService.announceLogin(this.userLogged);
 
 			;
 		},

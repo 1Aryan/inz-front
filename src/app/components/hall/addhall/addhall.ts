@@ -43,7 +43,7 @@ this.setFormValidators();
 }
 addHall(){
 	console.log("hala:" +this.hall.getAdress());
-	if(this.form.valid){
+	
 		
 		this.hallService.addHall(this.hall)
 		.subscribe(
@@ -56,7 +56,7 @@ addHall(){
 				this._flashMessagesService.show("Ta hala została dodana wczesniej!",{ cssClass: 'alert-danger', timeout: 2000 });
 			}
 			)
-	}
+	
 }
 
 private validValueSet(){

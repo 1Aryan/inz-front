@@ -31,22 +31,29 @@ constructor(
 	this.profileButton =false;
   	}
 ngOnInit(){
+
 this.subscribeUser();
+
 }
 logOut(){
-	this.storageService.clearLoginSubject();
+	this.storageService.announceLogout();
 	this.profileButton = false;
+	this.router.navigate(['/']);
 }
+
+
 subscribeUser(){
-	this.subscription = this.storageService.getLoginSubject().subscribe(
+	StorageService.LoginStream$.subscribe(
 		(account) => {
 			if(account != null){
-			this.userEmail = account.email;
-			this.loggedUser = account;
+				this.userEmail=account.email;
 			this.profileButton = true;
+		
 		}
 		
 		}
 		)
 }
+
+
 }
