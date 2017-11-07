@@ -4,5 +4,5 @@ export class SearchUser{
 	public name:string;
 	public role:string;
 	public lastname:string;
-	constructor(){}
+
 }

@@ -18,11 +18,11 @@
 
 
 <div class="form-group">
-  <label for="title">Number budynku</label>
+  <label for="title">Numer budynku</label>
   <input type="text"  class="form-control" id="number" name="number" placeholder="np. 5"
   formControlName="number">
   <div class="alert alert-danger" role="alert" *ngIf="( form.get('number').touched || form.get('number').dirty) && form.get('number').invalid">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" ></span>Podaj poprawny adres (np. Złota)
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" ></span>Błędny numer!
   </div>
 </div>
 

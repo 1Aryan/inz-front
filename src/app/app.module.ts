@@ -23,6 +23,8 @@ import {HallList} from './components/hall/halllist/halllist';
 import {PlayerProfile} from './components/profile/player-profile/player-profile';
 import {CoachProfile} from './components/profile/coach-profile/coach-profile';
 import {RefreeProfile} from './components/profile/refree-profile/refree-profile';
+
+
 @NgModule({
   declarations: [
     AppComponent,

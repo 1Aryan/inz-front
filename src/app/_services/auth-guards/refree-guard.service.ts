@@ -12,7 +12,8 @@ role:string;
     (account) => {
       if(account != null){
       this.role=account.role;
-    }})}
+    }})
+  }
   
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

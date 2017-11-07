@@ -35,35 +35,30 @@ hide(){this.authModal.hide();}
 
 showActivateModal(){
 	this.hide();
-	this.activateModal.show();}
-hideActivateModal(){this.activateModal.hide();}
+	this.activateModal.show();
+}
+hideActivateModal(){
+	this.activateModal.hide();
+}
 
 submit(){
-
 this.authService.login(this.user)
 	.subscribe(
 		(success) => {
 			
 			this._flashMessagesService.show("Zalogowano!",{ cssClass: 'alert-success', timeout: 1500 });
-
 			this.authService.getUser(success.id).subscribe((successLoggedUser) =>{
-
-			
 			this.hide();
 			this.userLogged= new User();
 			this.userLogged = successLoggedUser;
-
+			console.log(this.userLogged);
 			localStorage.setItem('token', success.token);
 			this._storageService.announceLogin(this.userLogged);
-
-			;
 		},
 		(error) => {
 			this._flashMessagesService.show("Błędne dane lub nieaktywne konto, sprawdź email!",{ cssClass: 'alert-danger', timeout: 2000 });
 		});
-		
 		},
-		
 		(errorLoggedUser) => {
 			this._flashMessagesService.show("Błędne dane lub nieaktywne konto, sprawdź email!",{ cssClass: 'alert-danger', timeout: 2000 });
 			

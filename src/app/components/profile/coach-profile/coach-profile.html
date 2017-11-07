@@ -1,1 +1,92 @@
-<h1> PROFIL TRENERA TODO</h1>
+<div class="row">
+ 
+  <div class="col-md-3">
+    <div class="row">
+      <div class="panel panel-default" >
+        <div class="panel-heading">Edytuj profil!</div>
+        <div class="panel-body">
+<form [formGroup]="form" novalidate>
+
+<div class="form-group">
+<label>Imię</label><br>
+<input class="form-control"  formControlName="name"  id="name" name="name"><br>
+</div>
+
+<div class="form-group">
+<label>Nazwisko</label><br>
+<input class="form-control"  formControlName="lastname"  id="lastname" name="lastname"><br>
+</div>
+
+<div class="form-group">
+<label>Rok urodzenia</label><br>
+<input class="form-control"  formControlName="year"  id="year" name="year"><br>
+</div>
+
+
+<div class="form-group">
+<label>Telefon</label><br>
+<input class="form-control"  formControlName="phone"  id="phone" name="phone" ><br>
+</div>
+
+<button type="submit" [disabled]="!form.valid" (click)="confirmationModal.show()" class="btn btn-default" >Edytuj</button>
+<button type="submit" (click)="passwordModal.show()" class="btn btn-default" >Przypomnij hasło</button>
+</form>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 ">cos</div>
+
+  <div class="col-md-4 ">wiecej czegos</div>
+
+   <div class="col-md-2 ">jeszcze wiecej czegos</div>
+  
+
+
+
+<div bsModal #confirmationModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+
+      <div class="panel panel-default" >
+        <div class="panel-heading"><h2>Sprawdź poprawność danych!</h2></div>
+        <div class="panel-body">
+   <p>Możesz edytować profil tylko raz w tygodniu!</p><hr/>
+   <p style="color:orange">W przypadku wprowadzenia nieprawidłowych danych możesz zostać pominięty przy zaproszeniach do drużyny!</p>
+    </div>
+<div class="panel-footer">
+   <button type="submit" (click)="confirmationModal.hide()" class="btn btn-default">Cofnij</button>
+  <button type="submit" (click)="editProfile();confirmationModal.hide()" class="btn btn-default">Edytuj!</button>
+ 
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div bsModal #passwordModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+
+      <div class="panel panel-default" >
+        <div class="panel-heading"><h2>Wpisz e-mail</h2></div>
+        <div class="panel-body">
+ <p>Możesz przypomnieć hasło tylko raz na godzinę!</p>
+
+    </div>
+<div class="panel-footer">
+   <button type="submit" (click)="passwordModal.hide()" class="btn btn-default">Cofnij</button>
+  <button type="submit" (click)="retrievePassword();passwordModal.hide()" class="btn btn-default">Zrób to!</button>
+ 
+</div>
+</div>
+</div>
+</div>
+</div>

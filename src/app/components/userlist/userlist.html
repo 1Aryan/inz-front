@@ -16,7 +16,7 @@
     <div class="row">
       <div class="panel panel-default" >
         <div class="panel-heading">Panel wyszukiwania</div>
-        <div class="panel-body">
+        <div class="panel-body" ><span data-toggle="tooltip" data-placement="top" title="Wciśnij ENTER aby wyszukać!">
 <label>Imię</label><br>
 <input (keyup.enter)="searchForUsers()" [(ngModel)]="searchUser.name" placeholder="Imię..."><br>
 <label>Nazwisko</label><br>
@@ -29,7 +29,7 @@
         {{role.name}}
    </option>
 </select>
-<button type="submit"  (click)="searchForUsers()" class="btn btn-default" >Szukaj</button>
+<button type="submit"  (click)="searchForUsers()" class="btn btn-default" >Szukaj</button></span>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
   <p><span style="color:#0000e6; font-size: 120% "> Rok urodzenia :</span> {{result.year}}</p>
   <p><span style="color:#0000e6; font-size: 120% "> E-mail :</span>  {{result.email}} </p>
   <p><span style="color:#0000e6; font-size: 120% "> Telefon : </span> {{result.phone}} </p> 
-
+   <p *ngIf="result.role=='Sędzia'"><span style="color:#0000e6; font-size: 120% "> Opłata : </span> {{result.salary}} zł </p> 
 </div></div>
   
 </div>

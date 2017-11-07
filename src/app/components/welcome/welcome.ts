@@ -3,6 +3,7 @@ import {StorageService} from '../../_services/storage.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ModalDirective } from 'ngx-bootstrap';
 import {AddHall} from '../hall/addhall/addhall';
+
 @Component({
   selector: 'welcome',
   templateUrl: './welcome.html',

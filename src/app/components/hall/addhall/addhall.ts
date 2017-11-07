@@ -42,9 +42,7 @@ ngOnInit(){
 this.setFormValidators();
 }
 addHall(){
-	console.log("hala:" +this.hall.getAdress());
-	
-		
+
 		this.hallService.addHall(this.hall)
 		.subscribe(
 			success=>{
@@ -66,7 +64,7 @@ this.hall.setDescription(this.form.value.description);
 this.hall.setPrice(this.form.value.price);
 this.hall.setCity(this.form.value.city);
 this.hall.setNumber(this.form.value.number);
-console.log(this.hall);
+
 }
 
 private setFormValidators(){

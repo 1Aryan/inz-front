@@ -3,21 +3,17 @@
 
    <div class="panel panel-default">
         <div class="panel-heading">Przeglądaj hale!</div>
-
   </div>
   <div class="col-md-4"></div>
 </div>
 </div>
-
-
-
 <div class="row">
  
   <div class="col-md-4">
     <div class="row">
       <div class="panel panel-default" >
         <div class="panel-heading">Panel wyszukiwania</div>
-        <div class="panel-body">
+        <div class="panel-body"><span data-toggle="tooltip" data-placement="top" title="Wciśnij ENTER aby wyszukać!">
 <label>Miasto</label><br>
 <input (keyup.enter)="searchForHalls()" [(ngModel)]="hall.city" placeholder="np. Warszawa"><br>
 <label>Adres</label><br>
@@ -27,6 +23,7 @@
 
 
 <button type="submit"  (click)="searchForHalls()" class="btn btn-default" >Szukaj</button>
+</span>
         </div>
       </div>
     </div>
