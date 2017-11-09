@@ -6,14 +6,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  
   title = 'Praca inzynierska';
 
-  constructor(private router:Router){
-
-  }
+  constructor(private router:Router){}
+ 
   ngOnInit(){
   	this.router.navigate(['']);
   }
-
 
 }

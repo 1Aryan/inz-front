@@ -1,4 +1,5 @@
 
+
 export class User{
 	
 	private name: string;
@@ -10,11 +11,12 @@ export class User{
   private role: string;
   private id: number;
   
-	private team_id: number;
-	private position: string;
-	private category: string;
-constructor(){}
+  private salary: number;
 
+	private category: string;
+
+  
+  public setSalary(salary:number){this.salary=salary}
   public setName(name: string){this.name = name}
   public setLastName(lastname: string){this.lastname = lastname}
   public setEmail(email: string){this.email = email}
@@ -22,9 +24,10 @@ constructor(){}
   public setYear(year: number){this.year = year}
   public setPassword(password: string){this.password = password}
   public setCategory(category : string){this.category = category}
-  public setPosition(position: string){this.position = position}
   public setRole(role: string){this.role = role}
+  // public setTeamId(teamId : number){this.teamId = teamId}
 
+  // public getTeamId(){return this.teamId}
   public getName(){return this.name}
   public getLastName(){return this.name}
   public getEmail(){return this.email}
@@ -32,5 +35,5 @@ constructor(){}
   public getYear(){return this.year}
   public getPassword(){return this.password}
   public getCategory(){return this.category}
-  public getPosition(){return this.position}
+
 }

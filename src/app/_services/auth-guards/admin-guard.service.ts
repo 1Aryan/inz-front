@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot} from '@angular/router';
 import {StorageService} from './../storage.service';
 @Injectable()
-export class RefreeGuardService implements CanActivate {
+export class AdminGuardService implements CanActivate {
 role:string;
   
   constructor(
@@ -17,18 +17,14 @@ role:string;
   
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.role=='Sędzia') {
+    if (this.role=='Admin') {
+      console.log(this.role);
       return true;
-    } else if(this.role=='Zawodnik') {
-      this.router.navigate(['/zawodnik']);
-       return false;
-      }
-      else if(this.role=='Trener'){
-        this.router.navigate(['/trener']);
-        return false;
+    } else this.router.navigate(['/']);
+      
       }
     }
     
-  }
+  
 
 

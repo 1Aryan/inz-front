@@ -13,6 +13,7 @@ export class Hall{
   public setAdress(adress: string){this.adress = adress}
   public setCity(city: string) {this.city =city}
   public setNumber(number: string){this.number = number}
+ 
   public getDescription(){return this.description}
   public getPrice(){return this.price}
   public getAdress(){return this.adress}

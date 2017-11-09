@@ -13,32 +13,31 @@ import 'rxjs/add/operator/map';
 
 
 export class HallList implements OnInit{
- results: any[]
- totalHalls: any;
- private hall:Hall;
+ 
+results: any[]
+totalHalls: any;
+private hall:Hall;
 
-
-ngOnInit(){
-	this.searchForHalls();
-}
 constructor(private hallService: HallService){
 	this.hall = new Hall();
 }
 
-searchForHalls(){
+ngOnInit(){
+	this.searchForHalls();
+}
 
+searchForHalls(){
 this.hallService.searchForHalls(this.hall)
 	.subscribe(
 		(success)=>{
 			this.totalHalls = this.hallService.totalHalls;
-
 			this.results = success;
+			console.log("wyszukano HALE");
 		},
 		(error)=>{
-			console.log("error");
+			console.log("nie wyszukano HAL");
 		}
 		)
-
 }
 
 }
