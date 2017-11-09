@@ -20,46 +20,37 @@ import {Router} from '@angular/router';
 export class UserRegister implements OnInit{
 
 @ViewChild('userModal') public userModal:ModalDirective;
+
+private form: FormGroup;
+private user: User;
 id:number=null;
 verifyEmail:string;
+
   roles = [
        {id: 0,name: "Zawodnik"},
        {id: 1,name: "Trener"},
        {id: 2,name: "Sędzia"},
      ];
 
+constructor(private fb: FormBuilder,private userService: UserService,private _flashMessagesService: FlashMessagesService,private router:Router){
+	this.user= new User();
+	}
+
 saveRole(){
  this.id = +this.id;
  this.user.setRole(this.roles[this.id].name);
 }
 
-private form: FormGroup;
-private user: User;
-constructor(
-private fb: FormBuilder,
-private userService: UserService,
-private _flashMessagesService: FlashMessagesService,
-private router:Router,
-	){
-	this.user= new User();
-
-	}
 ngOnInit(){
 this.setFormValidators();
 }
 
-show(){
-  this.userModal.show();
-}
-hide(){
-  this.userModal.hide();
-}
+show(){this.userModal.show(); }
+hide(){this.userModal.hide(); }
 
 submit(){
 	this.verifyEmail=this.user.getEmail();
-	
 	if(this.form.valid){
-		
 		this.userService.createUser(this.user)
 		.subscribe(
 			success=>{
@@ -75,7 +66,6 @@ submit(){
 }
 
 private validValueSet(){
-
 this.user.setEmail(this.form.value.email);
 this.user.setLastName(this.form.value.lastname);
 this.user.setName(this.form.value.name);
@@ -98,7 +88,6 @@ password2: ['', [Validators.required, Validators.minLength(8)]],
 },{validator: passwordValidator}),
 
 this.form.valueChanges.subscribe(data => this.validValueSet())
-
 }
 
 

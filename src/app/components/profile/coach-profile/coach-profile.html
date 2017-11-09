@@ -32,14 +32,15 @@
 <button type="submit" (click)="passwordModal.show()" class="btn btn-default" >Przypomnij hasło</button>
 </form>
 
-
-
-
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md-3 ">cos</div>
+  <div class="col-md-3 ">
+  	
+  	<button type="submit" *ngIf="subscribedTeam==null" (click)="createTeamModal.show()" [disabled]="createTeamBlocker" class="btn btn-default">Stwórz drużynę</button>
+
+  </div>
 
   <div class="col-md-4 ">wiecej czegos</div>
 
@@ -62,13 +63,7 @@ mySmallModalLabel" aria-hidden="true">
 <div class="panel-footer">
    <button type="submit" (click)="confirmationModal.hide()" class="btn btn-default">Cofnij</button>
   <button type="submit" (click)="editProfile();confirmationModal.hide()" class="btn btn-default">Edytuj!</button>
- 
-</div>
-</div>
-</div>
-</div>
-</div>
-
+</div></div></div></div></div>
 
 <div bsModal #passwordModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
 mySmallModalLabel" aria-hidden="true">
@@ -84,9 +79,24 @@ mySmallModalLabel" aria-hidden="true">
 <div class="panel-footer">
    <button type="submit" (click)="passwordModal.hide()" class="btn btn-default">Cofnij</button>
   <button type="submit" (click)="retrievePassword();passwordModal.hide()" class="btn btn-default">Zrób to!</button>
- 
-</div>
-</div>
-</div>
-</div>
-</div>
+</div></div></div></div></div>
+
+
+<div bsModal #createTeamModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+
+
+<h1>Stwórz drużynę!</h1><br>
+<p style="font-size:130%;color:orange"> Podając poprawne dane ułatwiasz wyszukanie drużyny i zwiększa szansę na zaproszenie do meczu ! Sprawdź poprawność przed zakończeniem.</p>
+<label>Nazwa drużyny</label><br>
+<input placeholder="5-20 znaków..." [(ngModel)]="newTeam.name"><br>
+<label>Miasto</label><br>
+<input [(ngModel)]="newTeam.city"><br>
+<label>Opis</label><br>
+<input placeholder="0-60 znaków..."[(ngModel)]="newTeam.description"><br>
+
+<button type="submit" (click)="createTeam();createTeamModal.hide()"  class="btn btn-default" >Stwórz</button>
+<button type="submit" (click)="createTeamModal.hide()"  class="btn btn-default" >Cofnij</button>
+</div></div></div>

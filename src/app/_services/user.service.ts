@@ -41,4 +41,15 @@ export class UserService {
     return this.http.get(url)
       .map(response => response.json());
   }
+
+  public createTeam(id,team){
+ 	let url = "http://localhost:8080/create/team/" + id;
+    let body = JSON.stringify(team);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(url, body, {headers: headers})
+      .map(response => response.json())
+
+  }
+
 }

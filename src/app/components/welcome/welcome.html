@@ -59,17 +59,19 @@ mySmallModalLabel" aria-hidden="true">
 
 <div bsModal #contactModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
 mySmallModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm">
+<div class="modal-dialog  modal-sm">
 <div class="modal-content">
 
 
       <div class="panel panel-default" >
         <div class="panel-heading">Kontakt z administracją</div>
         <div class="panel-body">
-    <textarea rows="5" placeholder="Twoja wiadomość..."></textarea>
+          
+    <input  [(ngModel)]="textMsg" placeholder="Krótka wiadomość...">
+
     </div>
 <div class="panel-footer">
-  <button type="submit" (click)="sendMsg()" class="btn btn-default">Wyślij</button>
+  <button type="submit" (click)="contactAdmin();contactModal.hide()" class="btn btn-default">Wyślij</button>
 </div>
 
 </div>

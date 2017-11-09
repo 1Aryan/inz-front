@@ -19,7 +19,6 @@ private user: User;
 private form: FormGroup;
 private retrieveId:any;
 
-
 constructor(private storageService: StorageService,private fb: FormBuilder,private userService: UserService) 
 {
 this.user = new User();
@@ -50,16 +49,14 @@ this.user.setYear(this.form.value.year);
 }
 
 editProfile(){
-
-	console.log(this.user);
 this.userService.editProfile(this.user)
 .subscribe(
 	success=>{
 
-		console.log("udalo sie edytowac playera//tu wstaw modal");
+		console.log("udalo sie edytowac playera");
 	},
 	error=>{
-		console.log("blad");
+		console.log("blad edycji playera");
 		
 	}
 	)}
@@ -69,10 +66,10 @@ this.userService.getPassword(this.retrieveId)
 .subscribe(
 	success=>{
 
-		console.log("udalo sie przypomniec haslo playera//tu wstaw modal");
+		console.log("udalo sie przypomniec haslo playera");
 	},
 	error=>{
-		console.log("juz przypominales haslo w przeciagu ostatniej godziny !");
+		console.log("juz przypominales haslo w przeciagu ostatniej godziny PLAYER!");
 		
 	}
 	)

@@ -3,6 +3,8 @@ import {StorageService} from '../../_services/storage.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ModalDirective } from 'ngx-bootstrap';
 import {AddHall} from '../hall/addhall/addhall';
+import {AdminService} from '../../_services/admin.service';
+import {MsgToAdmin} from '../../_models/MsgToAdmin';
 
 @Component({
   selector: 'welcome',
@@ -15,16 +17,17 @@ export class Welcome implements OnInit  {
 @ViewChild('contactModal') public contactModal:ModalDirective;
 @ViewChild('regulationsModal') public regulationsModal:ModalDirective;
 
+
 private profileButton: boolean;
 private userEmail: string;
+private textMsg: string;
+private userId: number;
+private msg: MsgToAdmin;
 
-
-
-constructor(
-	private storageService: StorageService,
-	) 
+constructor(private storageService: StorageService,private adminService : AdminService) 
 	{
 	this.profileButton =false;
+	this.msg = new MsgToAdmin();
   	}
 
 
@@ -41,9 +44,24 @@ subscribeUser(){
 		(account) => {
 			if(account != null){
 			this.profileButton = true;
-		}
-		
-		}
-		)
+			this.userId=account.id;
+		}})
 }
+
+contactAdmin(){
+this.msg.setId(this.userId);
+this.msg.setMsg(this.textMsg);
+this.adminService.contactAdmin(this.msg)
+.subscribe(
+	success=>{
+		console.log("succesfuly contacted admin")
+	},
+	error=>{
+		console.log("unsuccessfuly contated admin")	
+	}
+	)
+}
+
+
+
 }

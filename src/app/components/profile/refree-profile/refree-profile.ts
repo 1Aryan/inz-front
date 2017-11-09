@@ -15,15 +15,13 @@ import { mailValidator } from '../../../validators/mail-validator';
 })
 export class RefreeProfile  {
 
-
 private user: User;
 private form: FormGroup;
 private retrieveId:any;
 private salary: number;
 
 
-constructor(private storageService: StorageService,private fb: FormBuilder,private userService: UserService) 
-{
+constructor(private storageService: StorageService,private fb: FormBuilder,private userService: UserService) {
 this.user = new User();
 }
 
@@ -53,15 +51,13 @@ this.user.setYear(this.form.value.year);
 
 editProfile(){
 
-	console.log(this.user);
 this.userService.editProfile(this.user)
 .subscribe(
 	success=>{
-
-		console.log("udalo sie edytowac playera//tu wstaw modal");
+		console.log("udalo sie edytowac refree");
 	},
 	error=>{
-		console.log("blad");
+		console.log("blad edycji refree");
 		
 	}
 	)}
@@ -70,30 +66,28 @@ retrievePassword(){
 this.userService.getPassword(this.retrieveId)
 .subscribe(
 	success=>{
-
-		console.log("udalo sie przypomniec haslo playera//tu wstaw modal");
+		console.log("udalo sie przypomniec haslo refree");
 	},
 	error=>{
-		console.log("juz przypominales haslo w przeciagu ostatniej godziny !");
+		console.log("juz przypominales haslo w przeciagu ostatniej godziny REFREE !");
 		
 	}
 	)
 }
-editSalary(){
 
-	
+editSalary(){
 this.userService.editSalary(this.retrieveId,this.salary)
 .subscribe(
 	success=>{
-
-		console.log("udalo sie dodać hajsy//tu wstaw modal");
+		console.log("udalo sie dodać opłate REFREE");
 	},
 	error=>{
-		console.log("blad");
+		console.log("blad dodania opłaty REFREE");
 		
 	}
 	)}
-private setFormValidators(){
+
+setFormValidators(){
 this.form = this.fb.group({
 name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
 lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],

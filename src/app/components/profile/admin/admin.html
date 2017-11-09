@@ -1,0 +1,25 @@
+<div class="row">
+ 
+
+       
+ 
+   
+  </div>
+  <div class="col-md-4 ">
+
+  <div class="panel" > 
+    </div>
+    <div class="panel panel-default" *ngFor="let result of results">  
+    <div class="panel-heading">
+     <span style="color:orange; font-size: 140%">{{result._user.name}} {{result._user.lastname}}</span>
+     <div class="panel-body"  >
+  
+  <p> <span style="color:#0000e6; font-size: 130% ">Email : </span>{{result._user.email}}</p>
+  <p>  <span style="color:#0000e6; font-size: 130% ">Wiadomość :</span> {{result.msg}}  </p>
+  <p *ngIf="result.description">  <span style="color:#0000e6; font-size: 120% ">Opis:</span> {{result.description}} </p>
+
+<button type="submit" (click)="answerMsg()" class="btn btn-default">Odpisz</button></div>
+</div></div>
+  
+</div>
+<div class="col-md-4 "></div>
