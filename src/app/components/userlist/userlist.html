@@ -48,8 +48,7 @@
   
   <span style="color:#0000e6; font-size: 120% ">Rok urodzenia :</span> {{result.year}}
   <span style="color:#0000e6; font-size: 120%;padding-left:5em">E-mail :</span> <span *ngIf="result.role!='Admin'">{{result.email}} </span>
-  <span style="color:#0000e6; font-size: 120%;padding-left:5em">Telefon : </span><span *ngIf="result.role!='Admin'"> {{result.phone}} </span>
- <p *ngIf="result.team !=null"><span style="color:#0000e6; font-size: 120%">Drużyna : </span> <span style="color:orange; font-size: 120% ">{{result.team.name}}</span> z miasta <span style="color:orange; font-size: 120% ">{{result.team.city}}</span><br>
+ <p *ngIf="result.team !=null"><span style="color:#0000e6; font-size: 120%">Drużyna : </span> <span style="color:#065aa3; font-size: 120% ">{{result.team.name}}</span> z miasta <span style="color:#065aa3; font-size: 120% ">{{result.team.city}}</span><br>
 <span style="color:#0000e6; font-size: 120%">Opis drużyny : </span> {{result.team.description}}
  </p>
   

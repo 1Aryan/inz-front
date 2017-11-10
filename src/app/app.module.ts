@@ -16,14 +16,14 @@ import {AdminService} from './_services/admin.service';
 import { HttpModule } from '@angular/http';
 import {StorageService} from './_services/storage.service';
 import {UserList} from './components/userlist/userlist'
-import {SearchUserService} from './_services/searchUser.service';
+import {SearchService} from './_services/search.service';
 import {AddHall} from './components/hall/addhall/addhall';
 import {HallList} from './components/hall/halllist/halllist';
 import {PlayerProfile} from './components/profile/player-profile/player-profile';
 import {CoachProfile} from './components/profile/coach-profile/coach-profile';
 import {RefreeProfile} from './components/profile/refree-profile/refree-profile';
 import {Admin} from './components/profile/admin/admin';
-
+import {TeamList} from './components/teamlist/teamlist';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +37,8 @@ import {Admin} from './components/profile/admin/admin';
     PlayerProfile,
     CoachProfile,
     RefreeProfile,
-    Admin
+    Admin,
+    TeamList
   ],
   entryComponents: [
   ],
@@ -50,7 +51,7 @@ import {Admin} from './components/profile/admin/admin';
     AppRouterModule,
     ModalModule.forRoot()
   ],
-  providers: [AdminService,StorageService,HallService,SearchUserService,UserService,AuthService],
+  providers: [AdminService,StorageService,HallService,SearchService,UserService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

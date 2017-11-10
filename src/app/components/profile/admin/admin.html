@@ -18,8 +18,41 @@
   <p>  <span style="color:#0000e6; font-size: 130% ">Wiadomość :</span> {{result.msg}}  </p>
   <p *ngIf="result.description">  <span style="color:#0000e6; font-size: 120% ">Opis:</span> {{result.description}} </p>
 
-<button type="submit" (click)="answerMsg()" class="btn btn-default">Odpisz</button></div>
+<button type="submit" (click)="answerModal.show();setAnswerCredentials(result._user.email,result.msg)" class="btn btn-default">Odpisz</button>
+<button type="submit" (click)="setAnswerCredentials(result._user.email,result.msg);deleteModal.show()" class="btn btn-default">Skasuj</button>
+</div>
 </div></div>
   
 </div>
 <div class="col-md-4 "></div>
+
+<div bsModal #deleteModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<div class="modal-body">
+<h1>Czy na pewno chcesz skasować tą wiadomość?</h1>
+<button type="submit" (click)="deleteMessage();deleteModal.hide()" class="btn btn-default">Tak</button>
+<button type="submit" (click)="deleteModal.hide()" class="btn btn-default">Nie</button>
+</div>
+</div>
+</div>
+</div>
+
+<div bsModal #answerModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-body">
+  
+<input style="width:70%" [(ngModel)]="MsgFromAdmin">
+<br>
+<button type="submit" class="btn btn-default" (click)="answerModal.hide()" >Cofnij</button>
+<button type="submit" class="btn btn-default" (click)="answerModal.hide();answerUser()" >Odpisz</button>
+</div>
+</div>
+  
+</div>
+
+
+</div>

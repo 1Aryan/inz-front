@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-4"></div><div class="col-md-4">
+   <div class="panel panel-default">
+        <div class="panel-heading">Przeglądaj drużyny!</div>
+
+  </div>
+  <div class="col-md-4"></div>
+</div>
+</div>
+
+
+
+<div class="row">
+ 
+  <div class="col-md-4">
+    <div class="row">
+      <div class="panel panel-default" >
+        <div class="panel-heading">Panel wyszukiwania</div>
+        <div class="panel-body" ><span data-toggle="tooltip" data-placement="top" title="Wciśnij ENTER aby wyszukać!">
+<label>Nazwa</label><br>
+<input (keyup.enter)="searchForTeams()" [(ngModel)]="searchTeam.name" placeholder="Nazwa..."><br>
+<label>Miasto</label><br>
+<input (keyup.enter)="searchForTeams()" [(ngModel)]="searchTeam.city" placeholder="Miasto..."><br>
+
+<button type="submit"  (click)="searchForTeams()" class="btn btn-default" >Szukaj</button></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-8 ">
+
+  <div class="panel panel-info" > 
+  <div class="panel-heading">Znalezione drużyny ({{totalTeams}})</div></div>
+  
+
+    <div class="panel panel-default"  *ngFor="let result of results">  
+    <div class="panel-heading">
+    <div class="panel-body"  >
+  
+  <span style="color:#0000e6; font-size: 120% ">Nazwa :</span> {{result.name}}
+  <span style="color:#0000e6; font-size: 120%;padding-left:5em">Miasto :</span> {{result.city}}
+  <p><span style="color:#0000e6; font-size: 120%">Opis drużyny : </span> {{result.description}}</p>
+  
+  <button class="btn btn-default" (click)="getTeamDetails(result.id);detailsModal.show()"> Szczegóły </button>
+
+</div></div>
+  
+</div>
+</div></div>
+
+
+<div bsModal #detailsModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-body">
+  
+
+  <h2>Szczegóły drużyny</h2>
+          
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Rola</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Rok urodzenia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let teamresult of teamresults">
+      <td>{{teamresult.role}}</td>
+      <td>{{teamresult.name}}</td>
+      <td>{{teamresult.lastname}}</td>
+      <td>{{teamresult.year}}</td>
+      </tr>
+    
+    </tbody>
+   
+  </table>
+
+
+
+<button type="submit" class="btn btn-default" (click)="detailsModal.hide()" >Cofnij</button>
+</div>
+</div>
+  
+</div>
+
+
+</div>

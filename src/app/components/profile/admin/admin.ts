@@ -8,7 +8,7 @@ import {UserService} from '../../../_services/user.service'
 import { phoneValidator } from '../../../validators/phone-validator';
 import { mailValidator } from '../../../validators/mail-validator';
 import {AdminService} from '../../../_services/admin.service';
-import {MsgToAdmin} from '../../../_models/MsgToAdmin';
+import {MsgFromAdmin} from '../../../_models/MsgFromAdmin';
 
 @Component({
   selector: 'admin',
@@ -17,14 +17,24 @@ import {MsgToAdmin} from '../../../_models/MsgToAdmin';
 })
 export class Admin implements OnInit {
 
-private msg: MsgToAdmin;
+private adminMsg:any;
+private answer:MsgFromAdmin;
+private MsgFromAdmin:any;
 results: any[];
 
-constructor(private adminService : AdminService,) {
+constructor(private adminService : AdminService) {
+this.answer = new MsgFromAdmin();
+
 }
 
 ngOnInit(){
 	this.getMsgs();
+
+}
+
+setAnswerCredentials(email,msgTo){
+this.answer.setEmail(email); 
+this.answer.setMsgTo(msgTo);
 }
 
 getMsgs(){
@@ -36,5 +46,35 @@ getMsgs(){
 		}
 		)
 }
+
+answerUser(){
+
+this.answer.setMsgFrom(this.MsgFromAdmin);
+this.adminService.answerMsg(this.answer)
+	.subscribe(
+			success=>{
+				console.log("wyslano odpowiedz na wiadomosc od usera");
+			},
+			error=>{
+					console.log("NIEwyslano odpowiedz na wiadomosc od usera");
+			}
+		)
+
 }
 
+deleteMessage(){
+
+
+this.adminService.deleteMsg(this.answer)
+	.subscribe(
+			success=>{
+				console.log("SKASOWANO WIADOMOSC");
+			},
+			error=>{
+					console.log("Nieskasowano wiadomosci");
+			}
+		)
+
+}
+
+}
