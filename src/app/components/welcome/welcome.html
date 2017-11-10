@@ -1,86 +1,81 @@
-<link href='https://fonts.googleapis.com/css?family=Gruppo' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Gruppo' rel='stylesheet'>
 
-<body>
+	<flash-messages></flash-messages>
 
-<flash-messages></flash-messages>
+	<div class="text-center">
+	<h1> Witamy w BasketBlast!</h1>
+	<p> Zaloguj się aby przeglądać serwis w pełnym zakresie !</p>
 
+	</div>
 
-<div class="text-center">
-<h1> Witamy w BasketBlast!</h1>
-<p> Zaloguj się aby przeglądać serwis w pełnym zakresie !</p>
-
-</div>
-
-<div class="row">
-	<div class="col-md-4"></div>
-  <div class="col-md-4 text-center">
-    <div class="panel panel-default">
-        <div class="panel-heading">Panel użytkownika</div>
-        <div class="pane-body"><button class="btn btn-light" (click)="regulationsModal.show()">Regulamin</button></div>
-      
-        <button class="btn btn-light"  (click)="contactModal.show()" [disabled]="!profileButton"><span data-toggle="tooltip" data-placement="top" title="Zaloguj się!">Kontakt z administratorem</span></button>
-        <br>
-        <button class="btn btn-light" [disabled]="!profileButton" (click)="hallModal.show()" allign="center"><span data-toggle="tooltip" data-placement="top" title="Zaloguj się!">Dodaj halę</span></button>
-  </div>
-  </div>
-<div class="col-md-4 text-center">
-
- </div>
-</div>
-<hr/>
- <div class="text-center">
- 	<h1> Aktualności</h1>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</div>
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4 text-center">
+			<div class="panel panel-default">
+					<div class="panel-heading">Panel użytkownika</div>
+					<div class="pane-body"><button class="btn btn-light" (click)="regulationsModal.show()">Regulamin</button></div>
+				
+					<button class="btn btn-light"  (click)="contactModal.show()" [disabled]="!profileButton"><span data-toggle="tooltip" data-placement="top" title="Zaloguj się!">Kontakt z administratorem</span></button>
+					<br>
+					<button class="btn btn-light" [disabled]="!profileButton" (click)="hallModal.show()" allign="center"><span data-toggle="tooltip" data-placement="top" title="Zaloguj się!">Dodaj halę</span></button>
+		</div>
+		</div>
+	<div class="col-md-4 text-center"></div>
+	</div>
+	<hr/>
+	 <div class="text-center">
+		<h1> Aktualności</h1>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	</div>
 
 
-<div bsModal #regulationsModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
-mySmallModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm">
-<div class="modal-content">
+	<div bsModal #regulationsModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+	mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+	<div class="modal-content">
 
-      <div class="panel panel-default" >
-        <div class="panel-heading">Regulamin</div>
-        <div class="panel-body">
-   <p> 1. Nie będziesz miał bogów cudzych przede mną</p><hr/>
-   <p> 2. Korzystaj z serwisu rozważnie </p>
-    </div>
-<div class="panel-footer">
-  <button type="submit" (click)="regulationsModal.hide()" class="btn btn-default">Zamknij</button>
-</div>
+				<div class="panel panel-default" >
+					<div class="panel-heading">Regulamin</div>
+					<div class="panel-body">
+		 <p> 1. Nie będziesz miał bogów cudzych przede mną</p><hr/>
+		 <p> 2. Korzystaj z serwisu rozważnie </p>
+			</div>
+	<div class="panel-footer">
+		<button type="submit" (click)="regulationsModal.hide()" class="btn btn-default">Zamknij</button>
+	</div>
 
-</div>
+	</div>
 
-  
-</div>
-</div>
-</div>
-
-
-<div bsModal #contactModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
-mySmallModalLabel" aria-hidden="true">
-<div class="modal-dialog  modal-sm">
-<div class="modal-content">
+		
+	</div>
+	</div>
+	</div>
 
 
-      <div class="panel panel-default" >
-        <div class="panel-heading">Kontakt z administracją</div>
-        <div class="panel-body">
-          
-    <input  [(ngModel)]="textMsg" placeholder="Krótka wiadomość...">
+	<div bsModal #contactModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+	mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog  modal-lg">
+	<div class="modal-content">
 
-    </div>
-<div class="panel-footer">
-  <button type="submit" (click)="contactAdmin();contactModal.hide()" class="btn btn-default">Wyślij</button>
-</div>
 
-</div>
+				<div class="panel panel-default" >
+					<div class="panel-heading">Kontakt z administracją</div>
+					<div class="panel-body">
+						<p style="font-size:130%">Pamiętaj, że możesz miec 'aktywną' tylko 1 wiadomość!</p>
+			<input style="width:70%" [(ngModel)]="textMsg" placeholder="Krótka wiadomość...">
 
-</div>
-</div>
-</div>
+			</div>
+	<div class="panel-footer">
+		<button type="submit" (click)="contactAdmin();contactModal.hide()" class="btn btn-default">Wyślij</button>
+	</div>
 
-<add-hall #hallModal> </add-hall>
+	</div>
+
+	</div>
+	</div>
+	</div>
+
+	<add-hall #hallModal> </add-hall>
 
 
 

@@ -1,7 +1,8 @@
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
-import { MsgToAdmin} from '../_models/MsgToAdmin'
+import { MsgToAdmin} from '../_models/MsgToAdmin';
+import { MsgFromAdmin} from '../_models/MsgFromAdmin';
 @Injectable()
 export class AdminService {
   
@@ -30,6 +31,30 @@ public getMsgs() {
       .map(response => response.json());
   }
 
+public answerMsg(msg: MsgFromAdmin){
+    
+    let url = "http://localhost:8080/answer";
+    let body = JSON.stringify(msg);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(url, body, {headers: headers})
+      .map((res) => { 
+        return res.json();
+       })
+  }
+
+public deleteMsg(msg: MsgFromAdmin){
+    
+    let url = "http://localhost:8080/delete/msg";
+    let body = JSON.stringify(msg);
+    console.log(body);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(url, body, {headers: headers})
+      .map((res) => { 
+        return res.json();
+       })
+  }
 
 }
 

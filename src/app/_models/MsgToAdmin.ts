@@ -1,4 +1,3 @@
-
 export class MsgToAdmin{
 	public id: number;
 	public msg: string;

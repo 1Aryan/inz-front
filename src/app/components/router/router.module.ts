@@ -12,6 +12,7 @@ import {RefreeGuardService} from '../../_services/auth-guards/refree-guard.servi
 import {RefreeProfile} from '../profile/refree-profile/refree-profile';
 import {Admin} from '../profile/admin/admin';
 import {AdminGuardService} from '../../_services/auth-guards/admin-guard.service';
+import {TeamList} from '../teamlist/teamlist'
 
 const routes : Routes = [
 {path:'', component: Welcome},
@@ -21,8 +22,8 @@ const routes : Routes = [
 {path: 'trener', component: CoachProfile,canActivate: [CoachGuardService]},
 {path: 'sedzia', component: RefreeProfile,canActivate: [RefreeGuardService]},
 {path: 'admin', component: Admin,canActivate: [AdminGuardService]},
+{path: 'druzyny', component: TeamList, canActivate: [AuthGuardService]},
 ]
-
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule],

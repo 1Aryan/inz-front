@@ -5,8 +5,6 @@ export class Hall{
 	private adress:string;
 	private city:string;
 	private number:string;
-	constructor(){}
-
 
   public setDescription(description: string){this.description = description}
   public setPrice(price: string){this.price = price}

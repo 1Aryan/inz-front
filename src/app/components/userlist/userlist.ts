@@ -2,7 +2,7 @@ import { Component,ViewChild, OnInit} from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import {SearchUser} from '../../_models/SearchUser';
-import {SearchUserService} from '../../_services/searchUser.service'
+import {SearchService} from '../../_services/search.service'
 import 'rxjs/add/operator/map';
 import {StorageService} from '../../_services/storage.service';
 @Component({
@@ -27,7 +27,7 @@ export class UserList implements OnInit{
        {id: 3,name: "Wszystkie"},
      ];
 
-constructor(private _searchUserService: SearchUserService,private storageService: StorageService){
+constructor(private _searchService: SearchService,private storageService: StorageService){
 	this.searchUser = new SearchUser();
 }
  
@@ -43,10 +43,11 @@ saveRole(){
 }
 
 searchForUsers(){
-this._searchUserService.searchForUsers(this.searchUser)
+this._searchService.searchForUsers(this.searchUser)
 	.subscribe(
 		(success)=>{
-			this.totalUsers = this._searchUserService.totalUsers;
+			console.log(success);
+			this.totalUsers = this._searchService.totalUsers;
 			this.results = success;
 			console.log("users searched success");
 		},
