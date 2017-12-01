@@ -3,15 +3,12 @@
    <div class="panel panel-default">
         <div class="panel-heading">Przeglądaj drużyny!</div>
 
-  </div>
-  <div class="col-md-4"></div>
+</div>
+<div class="col-md-4"></div>
 </div>
 </div>
-
-
 
 <div class="row">
- 
   <div class="col-md-4">
     <div class="row">
       <div class="panel panel-default" >
@@ -32,7 +29,6 @@
 
   <div class="panel panel-info" > 
   <div class="panel-heading">Znalezione drużyny ({{totalTeams}})</div></div>
-  
 
     <div class="panel panel-default"  *ngFor="let result of results">  
     <div class="panel-heading">
@@ -43,11 +39,12 @@
   <p><span style="color:#0000e6; font-size: 120%">Opis drużyny : </span> {{result.description}}</p>
   
   <button class="btn btn-default" (click)="getTeamDetails(result.id);detailsModal.show()"> Szczegóły </button>
-
-</div></div>
   
 </div>
-</div></div>
+</div>
+</div>
+</div>
+</div>
 
 
 <div bsModal #detailsModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
@@ -55,10 +52,7 @@ mySmallModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
 <div class="modal-body">
-  
-
-  <h2>Szczegóły drużyny</h2>
-          
+  <h2>Szczegóły drużyny <div *ngIf="oppositeTeam!=null"><span style="color:orange">{{oppositeTeam.name}}</span></div></h2>     
   <table class="table">
     <thead>
       <tr>
@@ -75,18 +69,39 @@ mySmallModalLabel" aria-hidden="true">
       <td>{{teamresult.lastname}}</td>
       <td>{{teamresult.year}}</td>
       </tr>
-    
     </tbody>
-   
   </table>
-
-
-
+ 
 <button type="submit" class="btn btn-default" (click)="detailsModal.hide()" >Cofnij</button>
+<button *ngIf="subscribedAccount.team!=null &&subscribedAccount.team.id!=oppositeTeamId" class="btn btn-success" (click)="createMatchModal.show();detailsModal.hide();searchForHalls();searchForRefs()"> Zaproś do meczu</button>
 </div>
 </div>
-  
+</div>
 </div>
 
 
+
+
+ <div bsModal #createMatchModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div *ngIf="oppositeTeam!=null"><h1>Zapraszasz do meczu <span style="color:orange">{{oppositeTeam.name}}</span></h1></div>
+<label for="title">Wybierz halę</label><br>
+<select >
+   <option  *ngFor="let foundHall of foundHalls" >
+        {{foundHall.city}}, {{foundHall.adress}} {{foundHall.number}}, {{foundHall.price}}zł | {{foundHall.description}}
+   </option>
+</select>
+<hr/>
+<label for="title">Wybierz sędziego</label><br>
+<select >
+   <option  *ngFor="let foundRef of foundRefs" >
+       {{foundRef.email}} | {{foundRef.name}} {{foundRef.lastname}}, {{foundRef.phone}}
+   </option>
+</select>
+<hr/>
+
+<button >Stwórz</button>
 </div>
+</div>
+</div> 

@@ -9,6 +9,7 @@ import { phoneValidator } from '../../../validators/phone-validator';
 import { mailValidator } from '../../../validators/mail-validator';
 import {Team} from '../../../_models/Team'
 import {Router} from '@angular/router';
+import {SearchService} from '../../../_services/search.service'
 
 @Component({
   selector: 'coach-profile',
@@ -23,9 +24,12 @@ private retrieveId:any;
 private subscribedUser: any[];
 private newTeam: Team;
 private subscribedTeam:any;
+private teamresults:any[];
+private editedTeam: Team;
 
-constructor(private router:Router, private storageService: StorageService,private fb: FormBuilder,private userService: UserService) 
+constructor(private router:Router,private searchService:SearchService, private storageService: StorageService,private fb: FormBuilder,private userService: UserService) 
 {
+this.editedTeam=new Team();
 this.user = new User();
 this.newTeam = new Team();
 }
@@ -33,22 +37,57 @@ this.newTeam = new Team();
 ngOnInit(){
 	this.subscribeUser();
 	this.setFormValidators();
+
 }
 
 subscribeUser(){
 	StorageService.LoginStream$.subscribe(
 		(account) => {
 			if(account != null){
-			
+			console.log(account);
 			this.retrieveId=account.id;
 			this.user.setEmail(account.email);
 			this.subscribedUser=account;
-			this.subscribedTeam=account.teamDTO;
+			this.subscribedTeam=account.team;
+			if(account.team!=null){
+			this.getTeamDetails(this.subscribedTeam.id);
+			}
 		
 		}})
 }
 
+getUser(){
+	this.userService.getUser(this.retrieveId).subscribe(
+	success=>{
+		this.storageService.announceLogout;
+		this.storageService.announceLogin(success);
+	})
+}
 
+getTeamDetails(id){
+	this.searchService.getTeamDetails(id)
+	.subscribe(
+		(success)=>{
+			this.teamresults=success;
+			console.log("szczegoly druzyny success");
+		},
+		(error)=>{
+			console.log("szczegoly druzyny FAIL");
+		}
+		)
+}
+
+removePlayer(id){
+	this.userService.removePlayerFromTeam(id)
+	.subscribe(
+		success=>{
+			this.subscribeUser();
+			console.log("usunieto playera");
+		},
+		
+		error=>{
+		console.log("nieusunieto playera");
+	})}
 
 editProfile(){
 this.userService.editProfile(this.user)
@@ -61,10 +100,25 @@ this.userService.editProfile(this.user)
 	}
 	)}
 
+editTeam(){
+	this.searchService.editTeam(this.editedTeam, this.subscribedTeam.id)
+	.subscribe(
+		success=>{
+		this.getUser();
+		console.log("Edytowano druzyne");
+		
+		},
+		error=>{
+			console.log("NIEedytowano drużyny");
+		}
+		)
+}
+
 createTeam(){
 	this.userService.createTeam(this.retrieveId,this.newTeam)
 	.subscribe(
 		success=>{
+			this.storageService.announceLogout();
 			this.storageService.announceLogin(success);
 			console.log("udalo sie stworzyc drużynę");
 		},

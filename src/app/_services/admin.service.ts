@@ -31,6 +31,15 @@ public getMsgs() {
       .map(response => response.json());
   }
 
+public getInactiveHalls() {
+    let url = "http://localhost:8080/halls/inactive";
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(url)
+      .map(response => response.json());
+  }
+
+
 public answerMsg(msg: MsgFromAdmin){
     
     let url = "http://localhost:8080/answer";
@@ -55,6 +64,23 @@ public deleteMsg(msg: MsgFromAdmin){
         return res.json();
        })
   }
+public activateHall(id){
+  let url = "http://localhost:8080/halls/activate/" + id;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(url)
+      .map(response => response.json());
+
+}
+
+public deleteHall(id){
+  let url = "http://localhost:8080/halls/delete/" + id;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(url)
+      .map(response => response.json());
+
+}
 
 }
 

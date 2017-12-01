@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   public getUser(id) {
-    console.log(id);
+    
     let url = "http://localhost:8080/user/" + id;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

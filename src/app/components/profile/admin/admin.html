@@ -1,30 +1,41 @@
-<div class="row">
- 
-
-       
- 
-   
-  </div>
-  <div class="col-md-4 ">
-
-  <div class="panel" > 
-    </div>
+<div class="col-md-3 ">
+  <div class="panel panel-default" >  
+    <div class="panel-heading">Wiadomości</div></div>
     <div class="panel panel-default" *ngFor="let result of results">  
     <div class="panel-heading">
-     <span style="color:orange; font-size: 140%">{{result._user.name}} {{result._user.lastname}}</span>
-     <div class="panel-body"  >
-  
+    <span style="color:orange; font-size: 140%">{{result._user.name}} {{result._user.lastname}}</span>
+    <div class="panel-body"  >
   <p> <span style="color:#0000e6; font-size: 130% ">Email : </span>{{result._user.email}}</p>
   <p>  <span style="color:#0000e6; font-size: 130% ">Wiadomość :</span> {{result.msg}}  </p>
   <p *ngIf="result.description">  <span style="color:#0000e6; font-size: 120% ">Opis:</span> {{result.description}} </p>
-
 <button type="submit" (click)="answerModal.show();setAnswerCredentials(result._user.email,result.msg)" class="btn btn-default">Odpisz</button>
 <button type="submit" (click)="setAnswerCredentials(result._user.email,result.msg);deleteModal.show()" class="btn btn-default">Skasuj</button>
 </div>
-</div></div>
-  
 </div>
-<div class="col-md-4 "></div>
+</div>
+</div>
+
+<div class="col-md-3 ">
+    
+    <div class="panel panel-default" >  
+    <div class="panel-heading">Hale do aktywacji</div></div>
+    <div class="panel panel-default"   *ngFor="let hallResult of hallResults" >  
+      
+    <div class="panel-body" *ngIf="hallResult.activated==false" >
+  <p> <span style="color:#0000e6; font-size: 130% ">Ulica: </span>{{hallResult.adress}} {{hallResult.number}}</p>
+  <p>  <span style="color:#0000e6; font-size: 130% ">Miasto: </span> {{hallResult.city}}  </p>
+  <p>  <span style="color:#0000e6; font-size: 120% ">Cena: </span>{{hallResult.price}} zł</p>
+  <p>  <span style="color:#0000e6; font-size: 120% ">Opis: </span>{{hallResult.description}} </p>
+<button type="submit" (click)="activateHall(hallResult.id)" class="btn btn-default">Zatwierdź</button>
+<button type="submit" (click)="deleteHall(hallResult.id)" class="btn btn-default">Odrzuć</button>
+</div>
+
+</div>
+</div>
+
+
+
+
 
 <div bsModal #deleteModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
 mySmallModalLabel" aria-hidden="true">

@@ -21,7 +21,7 @@ private adminMsg:any;
 private answer:MsgFromAdmin;
 private MsgFromAdmin:any;
 results: any[];
-
+hallResults:any[];
 constructor(private adminService : AdminService) {
 this.answer = new MsgFromAdmin();
 
@@ -29,7 +29,7 @@ this.answer = new MsgFromAdmin();
 
 ngOnInit(){
 	this.getMsgs();
-
+	this.getHalls();
 }
 
 setAnswerCredentials(email,msgTo){
@@ -48,11 +48,11 @@ getMsgs(){
 }
 
 answerUser(){
-
 this.answer.setMsgFrom(this.MsgFromAdmin);
 this.adminService.answerMsg(this.answer)
 	.subscribe(
 			success=>{
+				this.getMsgs();
 				console.log("wyslano odpowiedz na wiadomosc od usera");
 			},
 			error=>{
@@ -63,11 +63,10 @@ this.adminService.answerMsg(this.answer)
 }
 
 deleteMessage(){
-
-
 this.adminService.deleteMsg(this.answer)
 	.subscribe(
 			success=>{
+				this.getMsgs();
 				console.log("SKASOWANO WIADOMOSC");
 			},
 			error=>{
@@ -76,5 +75,43 @@ this.adminService.deleteMsg(this.answer)
 		)
 
 }
+activateHall(id){
+this.adminService.activateHall(id)
+.subscribe(
+	success=>{
+		this.getHalls();
+		console.log("aktywowano halę")
+	},
+	error=>{
+		console.log("aktywacja hali FAIL")
+	}
+	)
+}
 
+deleteHall(id){
+this.adminService.activateHall(id)
+.subscribe(
+	success=>{
+		this.getHalls();
+		console.log("skasowano halę")
+	},
+	error=>{
+		console.log("kasacja hali FAIL")
+	}
+	)
+}
+
+getHalls(){
+this.adminService.getInactiveHalls()
+.subscribe(
+	success=>{
+		this.hallResults=success;
+		console.log(success);
+		console.log("Getting inactive halls SUCCESS")
+	},
+	error=>{
+		console.log("Getting inactive halls FAILED")
+	}	
+	)
+}
 }

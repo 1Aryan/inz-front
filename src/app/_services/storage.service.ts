@@ -14,7 +14,7 @@ export class StorageService {
   }
 
   announceLogout() {
-    StorageService.logout.next(false);
+    StorageService.logout.next(null);
     StorageService.Login.next(null);
   }
 }

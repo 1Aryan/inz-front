@@ -5,13 +5,14 @@ import { ModalDirective } from 'ngx-bootstrap';
 import {AddHall} from '../hall/addhall/addhall';
 import {AdminService} from '../../_services/admin.service';
 import {MsgToAdmin} from '../../_models/MsgToAdmin';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'welcome',
   templateUrl: './welcome.html',
   styleUrls: ['./welcome.css']
 })
-export class Welcome implements OnInit  {
+export class Welcome implements OnInit,OnDestroy {
 
 @ViewChild('hallModal') public hallModal:AddHall;
 @ViewChild('contactModal') public contactModal:ModalDirective;
@@ -33,6 +34,9 @@ constructor(private storageService: StorageService,private adminService : AdminS
 
 ngOnInit(){
 	this.subscribeUser();
+}
+ngOnDestroy(){
+	this.storageService.announceLogout;
 }
 
 hideHallModal(){this.hallModal.hide();}
