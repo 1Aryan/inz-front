@@ -7,7 +7,7 @@ import {User} from '../../../_models/User'
 import {UserService} from '../../../_services/user.service'
 import { phoneValidator } from '../../../validators/phone-validator';
 import { mailValidator } from '../../../validators/mail-validator';
-
+import {SearchService} from '../../../_services/search.service'
 @Component({
   selector: 'player-profile',
   templateUrl: './player-profile.html',
@@ -15,11 +15,16 @@ import { mailValidator } from '../../../validators/mail-validator';
 })
 export class PlayerProfile implements OnInit {
 
+private teamresults:any[];
 private user: User;
 private form: FormGroup;
 private retrieveId:any;
+private invitationResults:any[];
+private userTeam: boolean=false;
+private subscribedTeam:any;
 
-constructor(private storageService: StorageService,private fb: FormBuilder,private userService: UserService) 
+
+constructor(private storageService: StorageService,private fb: FormBuilder,private searchService:SearchService,private userService: UserService) 
 {
 this.user = new User();
 }
@@ -28,17 +33,57 @@ this.user = new User();
 ngOnInit(){
 	this.subscribeUser();
 	this.setFormValidators();
+	this.getInvitations();
 }
 
 subscribeUser(){
 	StorageService.LoginStream$.subscribe(
 		(account) => {
 			if(account != null){
+				if(account.team!=null) this.userTeam=true;
 				console.log(account);
 			this.retrieveId=account.id;
-			this.user.setEmail(account.email);
-		
+
+			this.subscribedTeam=account.team;
+			if(account.team!=null){
+			this.getTeamDetails(this.subscribedTeam.id);
+			}
 		}})
+}
+getUserCredentials(){
+	this.userService.getUser(this.retrieveId)
+	.subscribe(
+		success=>{
+			this.storageService.announceLogin(success);
+		}
+		)
+}
+getInvitations(){
+	this.userService.getInvitations(this.retrieveId)
+		.subscribe(
+				success=>{
+						this.invitationResults=success;
+						console.log(this.invitationResults);
+						console.log("wyszukano zaproszenia do drużyn zawodnika");
+				},
+				error=>{
+						console.log("NIEwyszukano zaproszen do drużyn");
+				}
+			)
+
+}
+
+getTeamDetails(id){
+	this.searchService.getTeamDetails(id)
+	.subscribe(
+		(success)=>{
+			this.teamresults=success;
+			console.log("szczegoly druzyny success");
+		},
+		(error)=>{
+			console.log("szczegoly druzyny FAIL");
+		}
+		)
 }
 
 private validValueSet(){
@@ -61,6 +106,45 @@ this.userService.editProfile(this.user)
 	}
 	)}
 
+acceptInvitation(id){
+this.userService.acceptInvitation(this.retrieveId,id)
+	.subscribe(
+		success=>{
+			this.getUserCredentials();
+
+			console.log("Zaakceptowano zaproszenie");
+		},
+		error=>{
+			console.log("Blad w akceptacji zaproszenie");
+		}
+		)
+}
+
+denyInvitation(id){
+this.userService.denyInvitation(this.retrieveId,id)
+	.subscribe(
+		success=>{
+			this.getInvitations();
+			console.log("Odrzucono zaproszenie");
+		},
+		error=>{
+			console.log("Zaakceptowano zaproszenie");
+		}
+		)
+}
+leaveTeam(){
+	this.userService.removePlayerFromTeam(this.retrieveId).subscribe(
+		success=>{
+			this.getUserCredentials();
+			this.subscribeUser();
+			this.getInvitations();
+			console.log("Odszedles z teamu");
+		},
+		error=>{
+			console.log("Nie udało się odejsc z teamu");
+		}		
+		)
+}
 retrievePassword(){
 this.userService.getPassword(this.retrieveId)
 .subscribe(

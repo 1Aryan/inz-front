@@ -39,13 +39,36 @@ export class SearchService {
   }
 
    public getTeamDetails(id){
-   console.log(id);
+
     let url = "http://localhost:8080/search/teams/"+id;
     return this.http.get(url)
       .map((res) => { 
        return res.json();
        })
   
+  }
+
+  public editTeam(team: Team, id){
+ 
+ let url = "http://localhost:8080/edit/team/"+id;
+    let body = JSON.stringify(team);
+    let headers = new Headers();
+    console.log(body + "body");
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(url, body, {headers: headers})
+      .map((res) => { 
+       return res.json();
+       })
+  }
+
+  public removeTeam(id){
+let url = "http://localhost:8080/team/remove/"+id;
+console.log(url);
+    return this.http.get(url)
+      .map((res) => { 
+       return res.json();
+       })
+
   }
 
 }

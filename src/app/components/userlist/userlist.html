@@ -42,17 +42,17 @@
 
     <div class="panel panel-default"  *ngFor="let result of results">  
     <div class="panel-heading">
-    <button class="btn btn-primary">[{{result.role}}] {{result.name}} {{result.lastname}}</button><button *ngIf="result.team ==null && result.role=='Zawodnik' && subscribedAccount.role=='Trener'" class="btn btn-success"> Zaproś do drużyny</button></div>
+    <button class="btn btn-primary">[{{result.role}}] {{result.name}} {{result.lastname}}</button><button *ngIf="result.team ==null && result.role=='Zawodnik' && subscribedAccount.role=='Trener' && subscribedAccount.team!=null" class="btn btn-success" (click)="inviteToTeam(result.email)"> Zaproś do drużyny</button></div>
   
-     <div class="panel-body"  >
+     <div class="panel-body"  *ngIf="result.role!='Admin'" >
   
   <span style="color:#0000e6; font-size: 120% ">Rok urodzenia :</span> {{result.year}}
-  <span style="color:#0000e6; font-size: 120%;padding-left:5em">E-mail :</span> <span *ngIf="result.role!='Admin'">{{result.email}} </span>
+  <span style="color:#0000e6; font-size: 120%;padding-left:5em">E-mail :</span> <span>{{result.email}} </span>
  <p *ngIf="result.team !=null"><span style="color:#0000e6; font-size: 120%">Drużyna : </span> <span style="color:#065aa3; font-size: 120% ">{{result.team.name}}</span> z miasta <span style="color:#065aa3; font-size: 120% ">{{result.team.city}}</span><br>
 <span style="color:#0000e6; font-size: 120%">Opis drużyny : </span> {{result.team.description}}
  </p>
   
-  <p *ngIf="result.role=='Sędzia'"><span style="color:#0000e6; font-size: 120% "> Opłata : </span> {{result.salary}} zł </p> 
+<!--   <p *ngIf="result.role=='Sędzia'"><span style="color:#0000e6; font-size: 120% "> Opłata : </span> {{result.salary}} zł </p>  -->
 </div></div>
   
 </div>

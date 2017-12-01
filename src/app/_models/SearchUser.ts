@@ -5,4 +5,5 @@ export class SearchUser{
 	public role:string;
 	public lastname:string;
 
+	public setRole(role:string){this.role=role}
 }
