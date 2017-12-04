@@ -39,7 +39,7 @@
   <p><span style="color:red; font-size: 120%">Drużyna A : </span> {{foundMatch.teamA.name}}  
   	<button class="btn btn-default" (click)="getTeamDetails(foundMatch.teamA.id);detailsModal.show()"> Szczegóły </button></p>
    <p><span style="color:red; font-size: 120%">Drużyna B : </span> {{foundMatch.teamB.name}}
-   	<button class="btn btn-default" (click)="getTeamDetails(foundMatch.teamA.id);detailsModal.show()"> Szczegóły </button></p>
+   	<button class="btn btn-default" (click)="getTeamDetails(foundMatch.teamB.id);detailsModal.show()"> Szczegóły </button></p>
    	<p><span style="color:#0000e6">Sędzia : </span> {{foundMatch.ref.name}} {{foundMatch.ref.lastname}}
 	<p><span style="color:orange">Hala : </span> {{foundMatch.hall.city}}, {{foundMatch.hall.adress}} {{foundMatch.hall.number}}  
   
