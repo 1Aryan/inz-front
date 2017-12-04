@@ -7,7 +7,8 @@ import {User} from '../../../_models/User'
 import {UserService} from '../../../_services/user.service'
 import { phoneValidator } from '../../../validators/phone-validator';
 import { mailValidator } from '../../../validators/mail-validator';
-
+import {MatchService} from '../../../_services/match.service'
+import {MatchInvitation} from '../../../_models/MatchInvitation'
 @Component({
   selector: 'refree-profile',
   templateUrl: './refree-profile.html',
@@ -19,16 +20,19 @@ private user: User;
 private form: FormGroup;
 private retrieveId:any;
 private salary: number;
+private matchInvitations:any[];
 
-
-constructor(private storageService: StorageService,private fb: FormBuilder,private userService: UserService) {
+constructor(private storageService: StorageService,private fb: FormBuilder,private matchService:MatchService,private userService: UserService) {
 this.user = new User();
+
 }
 
 
 ngOnInit(){
 	this.subscribeUser();
 	this.setFormValidators();
+	this.getInvites();
+
 }
 
 subscribeUser(){
@@ -41,12 +45,50 @@ subscribeUser(){
 		
 		}})
 }
+acceptMatchInv(id){
+
+this.matchService.acceptRefMatch(id).subscribe(
+	success=>{
+		console.log("success accept Match");
+		this.getInvites();
+	},
+	error=>{
+		console.log("fail accept match");
+		this.getInvites();
+	}
+	)
+}
+denyMatchInv(id){
+this.matchService.denyMatch(id).subscribe(
+	success=>{
+		console.log("success deny  Match");
+		this.getInvites();
+	},
+	error=>{
+		console.log("fail deny match");
+		this.getInvites();
+	}
+	)
+}
 
 private validValueSet(){
 this.user.setLastName(this.form.value.lastname);
 this.user.setName(this.form.value.name);
 this.user.setPhone(this.form.value.phone);
 this.user.setYear(this.form.value.year);
+}
+
+getInvites(){
+	this.matchService.getRefMatchInvitations(this.retrieveId).subscribe(
+		success=>{
+			
+			this.matchInvitations=success;
+			console.log(this.matchInvitations);
+		},
+		error=>{
+			console.log("buont teamuf");
+		}
+		)
 }
 
 editProfile(){

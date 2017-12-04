@@ -1,4 +1,4 @@
-import { Component,ViewChild,OnInit,ViewContainerRef} from '@angular/core';
+import { Component,ViewChild,OnInit,ViewContainerRef,Directive, Output, EventEmitter, Input, SimpleChange} from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import {ModalDirective,ModalModule} from 'ngx-bootstrap/modal';
 import {StorageService} from '../../../_services/storage.service';
@@ -10,14 +10,14 @@ import { mailValidator } from '../../../validators/mail-validator';
 import {Team} from '../../../_models/Team'
 import {Router} from '@angular/router';
 import {SearchService} from '../../../_services/search.service'
-
+import {MatchService} from '../../../_services/match.service'
 @Component({
   selector: 'coach-profile',
   templateUrl: './coach-profile.html',
   styleUrls: ['./coach-profile.css']
 })
 export class CoachProfile  {
-
+@Output() onCreate: EventEmitter<any> = new EventEmitter<any>();
 private user: User;
 private form: FormGroup;
 private retrieveId:any;
@@ -26,8 +26,9 @@ private newTeam: Team;
 private subscribedTeam:any;
 private teamresults:any[];
 private editedTeam: Team;
-
-constructor(private router:Router,private searchService:SearchService, private storageService: StorageService,private fb: FormBuilder,private userService: UserService) 
+private matchInvitations: any[];
+private i:number=0;
+constructor(private router:Router,private searchService:SearchService, private matchService:MatchService,private storageService: StorageService,private fb: FormBuilder,private userService: UserService) 
 {
 this.editedTeam=new Team();
 this.user = new User();
@@ -37,8 +38,22 @@ this.newTeam = new Team();
 ngOnInit(){
 	this.subscribeUser();
 	this.setFormValidators();
-
+	this.getInvites();
+	 this.onCreate.emit('cos');
 }
+getInvites(){
+	this.matchService.getMatchInvitations(this.subscribedTeam.id).subscribe(
+		success=>{
+			
+			this.matchInvitations=success;
+			console.log(this.matchInvitations);
+		},
+		error=>{
+			console.log("buont teamuf");
+		}
+		)
+}
+
 
 subscribeUser(){
 	StorageService.LoginStream$.subscribe(
@@ -62,6 +77,31 @@ getUser(){
 		this.storageService.announceLogout;
 		this.storageService.announceLogin(success);
 	})
+}
+
+acceptMatchInv(id){
+this.matchService.acceptTeamMatch(id).subscribe(
+	success=>{
+		console.log("success accept Match");
+		this.getInvites();
+	},
+	error=>{
+		console.log("fail accept match");
+		this.getInvites();
+	}
+	)
+}
+denyMatchInv(id){
+this.matchService.denyMatch(id).subscribe(
+	success=>{
+		console.log("success deny  Match");
+		this.getInvites();
+	},
+	error=>{
+		console.log("fail deny match");
+		this.getInvites();
+	}
+	)
 }
 
 getTeamDetails(id){

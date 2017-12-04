@@ -38,17 +38,38 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 "></div>
-  <!-- 	 <div class="panel panel-default" >
-        <div class="panel-heading">Edytuj wynagrodzenie!</div>
-        <div class="panel-body">
-<p> Edytuj wynagrodzenie aby dokończyć tworzenie profilu !</p>
-  	<button type="submit" (click)="salaryModal.show()" class="btn btn-danger btn-lg" >Edytuj wynagrodzenie</button></div>
-</div></div></div> -->
-  <div class="col-md-4 ">wiecej czegos</div>
+  <div class="col-md-4 ">
+ 
+  <div class="panel panel-default" > 
+    <div class="panel-heading">Zaproszenia do meczów</div>
+    </div>
+    
+    <div class="panel panel-default"  *ngFor="let matchInvitation of matchInvitations" >  
+     <div class="panel-body"  >
+
+  <span style="color:blue">Nazwa drużyny A :</span> {{matchInvitation.teamA.name}}<br>
+  <span style="color:blue">Opis :</span> {{matchInvitation.teamA.description}}<br>
+  <span style="color:blue">Miasto :</span> {{matchInvitation.teamA.city}}<br>
+  <span style="color:violet">Nazwa drużyny B :</span> {{matchInvitation.teamB.name}}<br>
+  <span style="color:violet">Opis :</span> {{matchInvitation.teamB.description}}<br>
+  <span style="color:violet">Miasto :</span> {{matchInvitation.teamB.city}}<br>
+  <span style="color:orange">Hala :</span> {{matchInvitation.hall.city}}, {{matchInvitation.hall.adress}} {{matchInvitation.hall.number}} <br>
+  <span style="color:green">Data :</span> {{matchInvitation.date}} <br>
+
+  <span style="color:red">Proponowana zapłata :</span> {{matchInvitation.salary}}zł<br>
+
+
+   <button type="submit"  class="btn btn-default" (click)="acceptMatchInv(matchInvitation.id)">Przyjmij</button>
+   <button type="submit"  class="btn btn-default" (click)="denyMatchInv(matchInvitation.id)">Odrzuć</button>
+</div>
+</div>
+
+</div>
+
+  <div class="col-md-3 ">wiecej czegos</div>
 
    <div class="col-md-2 ">jeszcze wiecej czegos</div>
-  
+  </div>
 
 
 

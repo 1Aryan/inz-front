@@ -10,13 +10,12 @@ export class User{
 	private password: string;
   private role: string;
   private id: number;
-  
-  private salary: number;
+
 
 	private category: string;
 
   
-  public setSalary(salary:number){this.salary=salary}
+
   public setName(name: string){this.name = name}
   public setLastName(lastname: string){this.lastname = lastname}
   public setEmail(email: string){this.email = email}

@@ -24,6 +24,8 @@ import {CoachProfile} from './components/profile/coach-profile/coach-profile';
 import {RefreeProfile} from './components/profile/refree-profile/refree-profile';
 import {Admin} from './components/profile/admin/admin';
 import {TeamList} from './components/teamlist/teamlist';
+import {MatchService} from './_services/match.service';
+import {MatchList} from './components/matchlist/matchlist'
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,8 @@ import {TeamList} from './components/teamlist/teamlist';
     CoachProfile,
     RefreeProfile,
     Admin,
-    TeamList
+    TeamList,
+    MatchList
   ],
   entryComponents: [
   ],
@@ -51,7 +54,7 @@ import {TeamList} from './components/teamlist/teamlist';
     AppRouterModule,
     ModalModule.forRoot()
   ],
-  providers: [AdminService,StorageService,HallService,SearchService,UserService,AuthService],
+  providers: [MatchService,AdminService,StorageService,HallService,SearchService,UserService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

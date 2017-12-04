@@ -86,22 +86,34 @@ mySmallModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
 <div *ngIf="oppositeTeam!=null"><h1>Zapraszasz do meczu <span style="color:orange">{{oppositeTeam.name}}</span></h1></div>
-<label for="title">Wybierz halę</label><br>
-<select >
-   <option  *ngFor="let foundHall of foundHalls" >
+<label >Wybierz halę</label><br>
+<select [(ngModel)]="matchInv.hallId">
+   <option  *ngFor="let foundHall of foundHalls" [ngValue]="foundHall.id" >
         {{foundHall.city}}, {{foundHall.adress}} {{foundHall.number}}, {{foundHall.price}}zł | {{foundHall.description}}
    </option>
 </select>
 <hr/>
-<label for="title">Wybierz sędziego</label><br>
-<select >
-   <option  *ngFor="let foundRef of foundRefs" >
-       {{foundRef.email}} | {{foundRef.name}} {{foundRef.lastname}}, {{foundRef.phone}}
+<label>Wybierz sędziego</label><br>
+<select [(ngModel)]="matchInv.refId">
+   <option  *ngFor="let foundRef of foundRefs" [ngValue]="foundRef.id" >
+  {{foundRef.name}} {{foundRef.lastname}}, {{foundRef.phone}}
    </option>
 </select>
 <hr/>
+<!-- <input [(ngModel)]="matchInv.salary"><hr/> -->
+<label>Proponowana gaża <div *ngIf="matchInv.salary!=null"><span style="color:green" >[{{matchInv.salary}}]</span></div></label>
+<input type="range" min="50" max="400" step="10" #ranger (input)="saveSalary(ranger.value)">
 
-<button >Stwórz</button>
+<label>Wybierz datę(co najmniej 3 dni w przód)</label><br>
+<input type="date" [(ngModel)]="matchInv.date"><hr/>
+<label>Wybierz godzinę spotkania<span style="color:blue">{{selectedValues | json}}</span></label><br>
+<select id="role" name="role"  [(ngModel)]="id" (ngModelChange)="saveRole()">
+   <option *ngFor="let hour of hours" [ngValue]="hour.id" >
+        {{hour.name}}
+   </option>
+</select>
+<br><hr/>
+<button class="btn btn-success" (click)="inviteToMatch()" [disabled]="matchInv.date==null || matchInv.refId==null || matchInv.hallId==null || matchInv.hour==null || matchInv.salary==null" >Stwórz</button>
 </div>
 </div>
 </div> 
