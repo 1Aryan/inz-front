@@ -44,6 +44,23 @@ export class MatchService {
       .map(response => response.json());
   }
 
+ public getMatches(id){
+  	 let url = "http://localhost:8080/matches/search/"+id;
+   let headers = new Headers();
+   console.log(url);
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(url)
+      .map(response => response.json());
+  }
+
+   public getMatchesAsRef(id){
+  	 let url = "http://localhost:8080/matches/ref/search/"+id;
+   let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(url)
+      .map(response => response.json());
+  }
+
     public acceptTeamMatch(id){
   	 let url = "http://localhost:8080/match/team/accept/"+id;
    let headers = new Headers();
@@ -58,5 +75,7 @@ export class MatchService {
     return this.http.get(url)
       .map(response => response.json());
   }
+
+ 
   }
 

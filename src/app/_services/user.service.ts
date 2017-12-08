@@ -44,13 +44,7 @@ export class UserService {
       .map(response => response.json());
   }
 
-public getMatchInvitations(id) {
-    let url = "http://localhost:8080/match/invites/" + id;
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.get(url)
-      .map(response => response.json());
-  }
+
 
   public editSalary(id,salary) {
     let url = "http://localhost:8080/user/salary/" + id +"/"+ salary;
@@ -107,7 +101,7 @@ public getMatchInvitations(id) {
   public getInvitations(id){
      let url = "http://localhost:8080/invitation/player/" + id;
     let headers = new Headers();
-
+    console.log(url);
     headers.append('Content-Type', 'application/json');
     return this.http.get(url)
       .map(response => response.json());

@@ -23,7 +23,7 @@ const routes : Routes = [
 {path: 'sedzia', component: RefreeProfile,canActivate: [RefreeGuardService]},
 {path: 'admin', component: Admin,canActivate: [AdminGuardService]},
 {path: 'druzyny', component: TeamList, canActivate: [AuthGuardService]},
-{path: 'mecze', component: MatchList, canActivate: [AuthGuardService]},
+{path: 'mecze', component: MatchList},
 ]
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],

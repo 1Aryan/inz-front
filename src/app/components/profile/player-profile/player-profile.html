@@ -39,7 +39,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 ">
+  <div class="col-md-5 ">
    <div *ngIf="subscribedTeam!=null">
   <h2>Szczegóły drużyny <span style="color:orange">{{subscribedTeam.name}}</span></h2>     
   <table class="table">
@@ -80,22 +80,43 @@
    
      <div class="panel-body"  >
   
-  <span style="color:#0000e6; font-size: 120% ">Nazwa drużyny :</span> {{invitationResult.teamDTO.name}}<br>
-  <span style="color:#0000e6; font-size: 120% ">Opis :</span> {{invitationResult.teamDTO.description}}<br>
-   <span style="color:#0000e6; font-size: 120% ">Miasto :</span> {{invitationResult.teamDTO.city}}<br>
+  <span style="color:#0000e6; font-size: 120% ">Nazwa drużyny :</span> {{invitationResult.teamDAO.name}}<br>
+  <span style="color:#0000e6; font-size: 120% ">Opis :</span> {{invitationResult.teamDAO.description}}<br>
+   <span style="color:#0000e6; font-size: 120% ">Miasto :</span> {{invitationResult.teamDAO.city}}<br>
    <button class="btn btn-default" (click)="getTeamDetails(invitationResult.teamDTO.id);detailsModal.show()"> Szczegóły </button><br>
 
-   <button type="submit" (click)="acceptInvitation(invitationResult.teamDTO.id);" class="btn btn-default">Przyjmij</button>
-   <button type="submit" (click)="denyInvitation(invitationResult.teamDTO.id);" class="btn btn-default">Odrzuć</button>
+   <button type="submit" (click)="acceptInvitation(invitationResult.teamDAO.id);" class="btn btn-default">Przyjmij</button>
+   <button type="submit" (click)="denyInvitation(invitationResult.teamDAO.id);" class="btn btn-default">Odrzuć</button>
 </div></div>
 </div>
 
 </div></div>
 
-  <div class="col-md-3 ">Wolne 3 kolumny
+<div class="col-md-1 "> </div>
+   <div class="col-md-4 "> 
+
+ <div class="panel panel-default" > 
+    <div class="panel-heading">Aktywne mecze</div>
+    </div>
+
+    <div class="panel panel-default"  *ngFor="let foundMatch of foundMatches" >  
+    <div class="panel-heading">
+   
+     <div class="panel-body"  >
+
+  <span style="color:red">Gospodarz :</span> {{foundMatch.teamA.name}}<br>
+  <span style="color:red">Gość :</span> {{foundMatch.teamB.name}}<br>
+  <span style="color:blue">Sędzia :</span> {{foundMatch.ref.name}} {{foundMatch.ref.lastname}} <br>
+  <span style="color:orange">Hala :</span> {{foundMatch.hall.city}}, {{foundMatch.hall.adress}} {{foundMatch.hall.number}} <br>
+  <span style="color:green">Data :</span> {{foundMatch.date}} <br>
+</div>
+</div>
 </div>
 
-   <div class="col-md-4 ">Wolne 4 kolumny</div>
+  
+  </div>
+
+  </div>
   
 
 

@@ -15,9 +15,10 @@
         <div class="panel-heading">Panel wyszukiwania</div>
         <div class="panel-body" ><span data-toggle="tooltip" data-placement="top" title="Wciśnij ENTER aby wyszukać!">
 <label>Data od-></label><br>
-<input type="date" (keyup.enter)="searchForMatches()" ><br>
+<input type="date" [ngModel] ="dt1 | date:'yyyy-MM-dd'" (ngModelChange)="dt1 = $event" [value]="datee | date:'yyyy-MM-dd'"><br>
 <label>Data ->do</label><br>
-<input type="date" (keyup.enter)="searchForMatches()" ><br>
+<input type="date" [ngModel] ="dt2 | date:'yyyy-MM-dd'" (ngModelChange)="dt2 = $event" [value]="datee | date:'yyyy-MM-dd'"><br>
+   
 
 <button type="submit"  (click)="searchForMatches()" class="btn btn-default" >Szukaj</button></span>
         </div>
@@ -34,11 +35,11 @@
     <div class="panel-heading">
     <div class="panel-body"  >
   
-  <span style="color:#0000e6; font-size: 120% ">Data :</span> {{foundMatch.date}}
+  <span style="color:#0000e6; font-size: 120% ">Data :</span> {{foundMatch.date | date: 'dd/MM/yyyy HH:mm'}}
   <span style="color:#0000e6; font-size: 120%;padding-left:5em">Miasto :</span> {{foundMatch.hall.city}}
-  <p><span style="color:red; font-size: 120%">Drużyna A : </span> {{foundMatch.teamA.name}}  
+  <p><span style="color:red; font-size: 120%">Gospodarz : </span> {{foundMatch.teamA.name}}  
   	<button class="btn btn-default" (click)="getTeamDetails(foundMatch.teamA.id);detailsModal.show()"> Szczegóły </button></p>
-   <p><span style="color:red; font-size: 120%">Drużyna B : </span> {{foundMatch.teamB.name}}
+   <p><span style="color:red; font-size: 120%">Gość : </span> {{foundMatch.teamB.name}}
    	<button class="btn btn-default" (click)="getTeamDetails(foundMatch.teamB.id);detailsModal.show()"> Szczegóły </button></p>
    	<p><span style="color:#0000e6">Sędzia : </span> {{foundMatch.ref.name}} {{foundMatch.ref.lastname}}
 	<p><span style="color:orange">Hala : </span> {{foundMatch.hall.city}}, {{foundMatch.hall.adress}} {{foundMatch.hall.number}}  

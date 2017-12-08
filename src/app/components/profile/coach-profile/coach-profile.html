@@ -10,38 +10,32 @@
   <button type="submit" (click)="passwordModal.show()" class="btn btn-default" >Przypomnij hasło</button><br>
   <button type="submit" (click)="editModal.show()" class="btn btn-default" >Edytuj dane</button><br>
   <button type="submit" *ngIf="subscribedTeam!=null" (click)="editTeamModal.show()" class="btn btn-default">Edytuj drużynę</button><br>
+  <button type="submit" *ngIf="subscribedTeam!=null" (click)="teamModal.show()" class="btn btn-default">Szczegóły drużyny</button><br>
 </div></div>
 
 </div>
   
  
-  <div class="col-md-6 ">
-<div *ngIf="subscribedTeam!=null">
-  <h2>Szczegóły drużyny <span style="color:orange">{{subscribedTeam.name}}</span></h2>     
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Rola</th>
-        <th>Imię</th>
-        <th>Nazwisko</th>
-        <th>Rok urodzenia</th>
-        <th>Email</th>
-        <th>Telefon</th>
-        <th>Usuń</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let teamresult of teamresults">
-      <td>{{teamresult.role}}</td>
-      <td>{{teamresult.name}}</td>
-      <td>{{teamresult.lastname}}</td>
-      <td>{{teamresult.year}}</td>
-      <td>{{teamresult.email}}</td>
-      <td>{{teamresult.phone}}</td>
-      <td> <button type="button" *ngIf="teamresult.role!='Trener'" (click)="removePlayer(teamresult.id)" class="btn btn-danger btn-sm">X</button></td>
-      </tr>
-    </tbody>
-  </table></div>
+<div class="col-md-6 ">
+
+ <div class="panel panel-default" > 
+    <div class="panel-heading">Aktywne mecze</div>
+    </div>
+
+    <div class="panel panel-default"  *ngFor="let foundMatch of foundMatches" >  
+    <div class="panel-heading">
+   
+     <div class="panel-body"  >
+
+  <span style="color:red">Gospodarz :</span> {{foundMatch.teamA.name}}<br>
+  <span style="color:red">Gość :</span> {{foundMatch.teamB.name}}<br>
+  <span style="color:blue">Sędzia :</span> {{foundMatch.ref.name}} {{foundMatch.ref.lastname}}, {{foundMatch.ref.phone}} <br>
+  <span style="color:orange">Hala :</span> {{foundMatch.hall.city}}, {{foundMatch.hall.adress}} {{foundMatch.hall.number}} <br>
+  <span style="color:green">Data :</span> {{foundMatch.date}} <br>
+</div>
+</div>
+</div>
+
 </div>
  <div class="col-md-3 ">
  
@@ -56,7 +50,7 @@
    
      <div class="panel-body"  >
 
-  <span style="color:red">Nazwa drużyny :</span> {{matchInvitation.teamA.name}}<br>
+  <span style="color:red">Gospodarz :</span> {{matchInvitation.teamA.name}}<br>
   <span style="color:red">Opis :</span> {{matchInvitation.teamA.description}}<br>
   <span style="color:red">Miasto :</span> {{matchInvitation.teamA.city}}<br>
   <span style="color:blue">Sędzia :</span> {{matchInvitation.ref.name}} {{matchInvitation.ref.lastname}} <br>
@@ -64,9 +58,10 @@
   <span style="color:green">Data :</span> {{matchInvitation.date}} <br>
 
 
-   <button type="submit"  class="btn btn-default" (click)="acceptMatchInv(matchInvitation.id)">Przyjmij</button>
+   <button type="submit"  class="btn btn-default" (click)="acceptMatchInv(matchInvitation.id);getMatches()">Przyjmij</button>
    <button type="submit"  class="btn btn-default" (click)="denyMatchInv(matchInvitation.id)">Odrzuć</button>
-</div></div>
+</div>
+</div>
 </div>
 
 
@@ -200,4 +195,36 @@ mySmallModalLabel" aria-hidden="true">
 </div>
 </div> 
 
- 
+
+<div bsModal #teamModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+
+ <div *ngIf="subscribedTeam!=null">
+  <h2>Szczegóły drużyny <span style="color:orange">{{subscribedTeam.name}}</span></h2>     
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Rola</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Rok urodzenia</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>Usuń</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let teamresult of teamresults">
+      <td>{{teamresult.role}}</td>
+      <td>{{teamresult.name}}</td>
+      <td>{{teamresult.lastname}}</td>
+      <td>{{teamresult.year}}</td>
+      <td>{{teamresult.email}}</td>
+      <td>{{teamresult.phone}}</td>
+      <td> <button type="button" *ngIf="teamresult.role!='Trener'" (click)="removePlayer(teamresult.id)" class="btn btn-danger btn-sm">X</button></td>
+      </tr>
+    </tbody>
+  </table></div>
+
+</div></div></div>

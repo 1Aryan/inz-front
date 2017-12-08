@@ -9,6 +9,7 @@ import { phoneValidator } from '../../../validators/phone-validator';
 import { mailValidator } from '../../../validators/mail-validator';
 import {MatchService} from '../../../_services/match.service'
 import {MatchInvitation} from '../../../_models/MatchInvitation'
+import {SearchService} from '../../../_services/search.service'
 @Component({
   selector: 'refree-profile',
   templateUrl: './refree-profile.html',
@@ -21,8 +22,10 @@ private form: FormGroup;
 private retrieveId:any;
 private salary: number;
 private matchInvitations:any[];
+private foundMatches:any[];
+private teamresults:any[];
 
-constructor(private storageService: StorageService,private fb: FormBuilder,private matchService:MatchService,private userService: UserService) {
+constructor(private storageService: StorageService, private searchService:SearchService,private fb: FormBuilder,private matchService:MatchService,private userService: UserService) {
 this.user = new User();
 
 }
@@ -32,6 +35,7 @@ ngOnInit(){
 	this.subscribeUser();
 	this.setFormValidators();
 	this.getInvites();
+	this.getMatches();
 
 }
 
@@ -39,7 +43,7 @@ subscribeUser(){
 	StorageService.LoginStream$.subscribe(
 		(account) => {
 			if(account != null){
-				console.log(account);
+			console.log(account);
 			this.retrieveId=account.id;
 			this.user.setEmail(account.email);
 		
@@ -58,6 +62,35 @@ this.matchService.acceptRefMatch(id).subscribe(
 	}
 	)
 }
+
+getTeamDetails(id){
+	this.searchService.getTeamDetails(id)
+	.subscribe(
+		(success)=>{
+
+			this.teamresults=success;
+			
+			console.log("szczegoly druzyny success");
+		},
+		(error)=>{
+			console.log("szczegoly druzyny FAIL");
+		}
+		)
+}
+
+getMatches(){
+	this.matchService.getMatchesAsRef(this.retrieveId).subscribe(
+		success=>{
+			console.log("active matches found");
+			this.foundMatches = success;
+			console.log(this.foundMatches);
+		},
+		error=>{
+			console.log("matches not found properly");
+		}
+		)
+}
+
 denyMatchInv(id){
 this.matchService.denyMatch(id).subscribe(
 	success=>{

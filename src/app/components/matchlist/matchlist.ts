@@ -1,5 +1,6 @@
 import { Component,ViewChild, OnInit} from '@angular/core';
 import {SearchService} from '../../_services/search.service';
+import { SearchDates } from '../../_models/SearchDates'
 
 @Component({
   selector: 'match-list',
@@ -13,12 +14,16 @@ private foundMatches:any[]
 private teamResults:any[]
 private detailedTeamName:any;
 private totalMatches:number;
+private dates:SearchDates;
+private dt1=null;
+private dt2=null;
 constructor(private searchService:SearchService){
-
+this.dates = new SearchDates();
 }
 
 ngOnInit(){
 this.getMatches();
+
 }
 
 getMatches(){
@@ -47,7 +52,21 @@ getTeamDetails(id){
 		}
 		)
 }
-
+searchForMatches(){
+	this.dates.dateFrom = this.dt1;
+	this.dates.dateTo = this.dt2;
+	this.searchService.getMatchesWithinDates(this.dates).subscribe(
+			success=>{
+		console.log("found matches");
+		console.log(success);
+		this.foundMatches=success;
+		this.totalMatches=this.searchService.totalUsers;
+	},
+	error=>{
+		console.log("matches not found");
+	}
+	)
+}
 }
 
 

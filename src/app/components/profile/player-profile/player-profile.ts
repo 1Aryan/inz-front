@@ -8,6 +8,8 @@ import {UserService} from '../../../_services/user.service'
 import { phoneValidator } from '../../../validators/phone-validator';
 import { mailValidator } from '../../../validators/mail-validator';
 import {SearchService} from '../../../_services/search.service'
+import {MatchService} from '../../../_services/match.service'
+
 @Component({
   selector: 'player-profile',
   templateUrl: './player-profile.html',
@@ -22,9 +24,10 @@ private retrieveId:any;
 private invitationResults:any[];
 private userTeam: boolean=false;
 private subscribedTeam:any;
+private foundMatches:any[];
 
 
-constructor(private storageService: StorageService,private fb: FormBuilder,private searchService:SearchService,private userService: UserService) 
+constructor(private storageService: StorageService,private matchService:MatchService,private fb: FormBuilder,private searchService:SearchService,private userService: UserService) 
 {
 this.user = new User();
 }
@@ -34,16 +37,15 @@ ngOnInit(){
 	this.subscribeUser();
 	this.setFormValidators();
 	this.getInvitations();
+	if(this.subscribedTeam!=null) this.getMatches();
 }
 
 subscribeUser(){
 	StorageService.LoginStream$.subscribe(
 		(account) => {
 			if(account != null){
-				if(account.team!=null) this.userTeam=true;
-				console.log(account);
+			if(account.team!=null) this.userTeam=true;
 			this.retrieveId=account.id;
-
 			this.subscribedTeam=account.team;
 			if(account.team!=null){
 			this.getTeamDetails(this.subscribedTeam.id);
@@ -71,6 +73,19 @@ getInvitations(){
 				}
 			)
 
+}
+
+getMatches(){
+	
+	this.matchService.getMatches(this.subscribedTeam.id).subscribe(
+		success=>{
+			console.log(this.foundMatches);
+			this.foundMatches = success;
+		},
+		error=>{
+			console.log("matches not found properly");
+		}
+		)
 }
 
 getTeamDetails(id){
@@ -111,7 +126,6 @@ this.userService.acceptInvitation(this.retrieveId,id)
 	.subscribe(
 		success=>{
 			this.getUserCredentials();
-
 			console.log("Zaakceptowano zaproszenie");
 		},
 		error=>{
@@ -133,11 +147,15 @@ this.userService.denyInvitation(this.retrieveId,id)
 		)
 }
 leaveTeam(){
+
 	this.userService.removePlayerFromTeam(this.retrieveId).subscribe(
 		success=>{
+
+			this.getMatches();
 			this.getUserCredentials();
 			this.subscribeUser();
 			this.getInvitations();
+			
 			console.log("Odszedles z teamu");
 		},
 		error=>{

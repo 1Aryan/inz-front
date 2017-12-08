@@ -27,7 +27,8 @@ private subscribedTeam:any;
 private teamresults:any[];
 private editedTeam: Team;
 private matchInvitations: any[];
-private i:number=0;
+private foundMatches:any[];
+
 constructor(private router:Router,private searchService:SearchService, private matchService:MatchService,private storageService: StorageService,private fb: FormBuilder,private userService: UserService) 
 {
 this.editedTeam=new Team();
@@ -39,17 +40,15 @@ ngOnInit(){
 	this.subscribeUser();
 	this.setFormValidators();
 	this.getInvites();
-	 this.onCreate.emit('cos');
+	this.getMatches();
 }
 getInvites(){
 	this.matchService.getMatchInvitations(this.subscribedTeam.id).subscribe(
 		success=>{
-			
 			this.matchInvitations=success;
-			console.log(this.matchInvitations);
 		},
 		error=>{
-			console.log("buont teamuf");
+			console.log("failed to get invites");
 		}
 		)
 }
@@ -91,6 +90,19 @@ this.matchService.acceptTeamMatch(id).subscribe(
 	}
 	)
 }
+
+getMatches(){
+	this.matchService.getMatches(this.subscribedTeam.id).subscribe(
+		success=>{
+			console.log(success);
+			this.foundMatches = success;
+		},
+		error=>{
+			console.log("matches not found properly");
+		}
+		)
+}
+
 denyMatchInv(id){
 this.matchService.denyMatch(id).subscribe(
 	success=>{
