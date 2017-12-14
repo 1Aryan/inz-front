@@ -16,7 +16,9 @@ import {MatchService} from '../../_services/match.service';
 })
 
 export class TeamList implements OnInit{
+@ViewChild('flashModal') public flashModal:ModalDirective;
 
+private flashText: string;
 private searchTeam: Team;
 private subscribedAccount;
 private totalTeams;
@@ -79,10 +81,12 @@ inviteToMatch(){
 	console.log(this.matchInv);
 	this.matchService.inviteToMatch(this.matchInv).subscribe(
 		success=>{
-			console.log("Team invited to match");
+			this.flashText = "Drużyna zaproszona!";
+		this.flashModal.show();
 		},
 		error=>{
-			console.log("failed to invite team to match ");
+			this.flashText = "Błąd";
+		this.flashModal.show();
 		}
 		)
 }
@@ -93,7 +97,6 @@ this._searchService.searchForTeams(this.searchTeam)
 		(success)=>{
 			this.totalTeams = this._searchService.totalUsers;
 			this.results = success;
-			console.log(this.results);
 			console.log("teams searched success");
 		},
 		(error)=>{
@@ -110,7 +113,6 @@ getTeamDetails(id){
 			this.teamresults=success;
 			this.oppositeTeamId=this.teamresults[0].teamDAO.id;
 			this.oppositeTeam=this.teamresults[0].teamDAO;
-			
 			console.log("szczegoly druzyny success");
 		},
 		(error)=>{
@@ -125,7 +127,6 @@ this.hallService.searchForHalls(this.searchDummyHall)
 		(success)=>{
 			this.totalHalls = this.hallService.totalHalls;
 			this.foundHalls = success;
-		
 			console.log("wyszukano HALE");
 		},
 		(error)=>{
@@ -140,7 +141,6 @@ this._searchService.searchForUsers(this.searchDummyRefree)
 	.subscribe(
 		(success)=>{
 			this.foundRefs = success
-			console.log(this.foundRefs);
 			console.log("users searched success");
 		},
 		(error)=>{

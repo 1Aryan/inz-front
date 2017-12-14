@@ -16,7 +16,8 @@ import {MatchService} from '../../../_services/match.service'
   styleUrls: ['./player-profile.css']
 })
 export class PlayerProfile implements OnInit {
-
+@ViewChild('flashModal') public flashModal:ModalDirective;
+private flashText: string;
 private teamresults:any[];
 private user: User;
 private form: FormGroup;
@@ -65,8 +66,7 @@ getInvitations(){
 		.subscribe(
 				success=>{
 						this.invitationResults=success;
-						console.log(this.invitationResults);
-						console.log("wyszukano zaproszenia do drużyn zawodnika");
+						console.log("wyszukano zaproszenia do drużyn");
 				},
 				error=>{
 						console.log("NIEwyszukano zaproszen do drużyn");
@@ -79,7 +79,6 @@ getMatches(){
 	
 	this.matchService.getMatches(this.subscribedTeam.id).subscribe(
 		success=>{
-			console.log(this.foundMatches);
 			this.foundMatches = success;
 		},
 		error=>{
@@ -112,12 +111,12 @@ editProfile(){
 this.userService.editProfile(this.user)
 .subscribe(
 	success=>{
-
-		console.log("udalo sie edytowac playera");
+		this.flashText= "Udało się edytować profil!";
+			this.flashModal.show();
 	},
 	error=>{
-		console.log("blad edycji playera");
-		
+		this.flashText= "Błąd podczas edycji profilu.";
+		this.flashModal.show();
 	}
 	)}
 
@@ -126,10 +125,12 @@ this.userService.acceptInvitation(this.retrieveId,id)
 	.subscribe(
 		success=>{
 			this.getUserCredentials();
-			console.log("Zaakceptowano zaproszenie");
+			this.flashText= "Akceptowano zaproszenie, witaj w drużynie!";
+			this.flashModal.show();
 		},
 		error=>{
-			console.log("Blad w akceptacji zaproszenie");
+			this.flashText= "Błąd podczas akceptacji zaproszenia.";
+			this.flashModal.show();
 		}
 		)
 }
@@ -155,11 +156,12 @@ leaveTeam(){
 			this.getUserCredentials();
 			this.subscribeUser();
 			this.getInvitations();
-			
-			console.log("Odszedles z teamu");
+			this.flashText= "Pomyślnie odszedłeś z drużyny!";
+			this.flashModal.show();
 		},
 		error=>{
-			console.log("Nie udało się odejsc z teamu");
+			this.flashText= "Nie udało się odejść z drużyny.";
+			this.flashModal.show();
 		}		
 		)
 }
@@ -167,12 +169,12 @@ retrievePassword(){
 this.userService.getPassword(this.retrieveId)
 .subscribe(
 	success=>{
-
-		console.log("udalo sie przypomniec haslo playera");
+			this.flashText= "Hasło zostało wysłane na twój adres e-mail!";
+			this.flashModal.show();
 	},
 	error=>{
-		console.log("juz przypominales haslo w przeciagu ostatniej godziny PLAYER!");
-		
+		this.flashText= "Błąd, spróbuj później.";
+		this.flashModal.show();
 	}
 	)
 }

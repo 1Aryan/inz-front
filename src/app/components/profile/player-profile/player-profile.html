@@ -151,7 +151,7 @@ mySmallModalLabel" aria-hidden="true">
       <div class="panel panel-default" >
         <div class="panel-heading"><h2>Wpisz e-mail</h2></div>
         <div class="panel-body">
- <p>Możesz przypomnieć hasło tylko raz na godzinę!</p>
+ <p style="color:red;font-size:150%">Możesz przypomnieć hasło tylko raz na godzinę!</p>
 
     </div>
 <div class="panel-footer">
@@ -198,4 +198,13 @@ mySmallModalLabel" aria-hidden="true">
 </div>
 
 
+</div>
+
+<div bsModal #flashModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<p style="text-align:center;font-size:150%"> {{flashText}} </p>
+</div>
+</div>
 </div>

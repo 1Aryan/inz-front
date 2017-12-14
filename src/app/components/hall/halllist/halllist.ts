@@ -33,7 +33,6 @@ this.hallService.searchForHalls(this.hall)
 			this.totalHalls = this.hallService.totalHalls;
 			this.results = success;
 			console.log("wyszukano HALE");
-			console.log(this.results);
 		},
 		(error)=>{
 			console.log("nie wyszukano HAL");

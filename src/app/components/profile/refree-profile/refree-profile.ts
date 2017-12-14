@@ -16,6 +16,8 @@ import {SearchService} from '../../../_services/search.service'
   styleUrls: ['./refree-profile.css']
 })
 export class RefreeProfile  {
+@ViewChild('flashModal') public flashModal:ModalDirective;
+private flashText: string;
 
 private user: User;
 private form: FormGroup;
@@ -53,11 +55,13 @@ acceptMatchInv(id){
 
 this.matchService.acceptRefMatch(id).subscribe(
 	success=>{
-		console.log("success accept Match");
+		this.flashText= "Mecz zaakceptowany!";
+		this.flashModal.show();
 		this.getInvites();
 	},
 	error=>{
-		console.log("fail accept match");
+		this.flashText= "Mecz już nie istnieje.";
+		this.flashModal.show();
 		this.getInvites();
 	}
 	)
@@ -129,11 +133,12 @@ editProfile(){
 this.userService.editProfile(this.user)
 .subscribe(
 	success=>{
-		console.log("udalo sie edytowac refree");
+		this.flashText= "Udało się edytować profil!";
+		this.flashModal.show();
 	},
 	error=>{
-		console.log("blad edycji refree");
-		
+		this.flashText= "Błąd podczas edycji profilu.";
+		this.flashModal.show();
 	}
 	)}
 
@@ -141,26 +146,17 @@ retrievePassword(){
 this.userService.getPassword(this.retrieveId)
 .subscribe(
 	success=>{
-		console.log("udalo sie przypomniec haslo refree");
+		this.flashText= "Hasło zostało wysłane na twój adres e-mail!";
+			this.flashModal.show();
 	},
 	error=>{
-		console.log("juz przypominales haslo w przeciagu ostatniej godziny REFREE !");
+		this.flashText= "Błąd, spróbuj później.";
+			this.flashModal.show();
 		
 	}
 	)
 }
 
-editSalary(){
-this.userService.editSalary(this.retrieveId,this.salary)
-.subscribe(
-	success=>{
-		console.log("udalo sie dodać opłate REFREE");
-	},
-	error=>{
-		console.log("blad dodania opłaty REFREE");
-		
-	}
-	)}
 
 setFormValidators(){
 this.form = this.fb.group({

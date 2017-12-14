@@ -82,9 +82,9 @@ let url = "http://localhost:8080/team/remove/"+id;
 }
 
  public getMatchesWithinDates(dates : SearchDates){
-    console.log(dates);
      let url = "http://localhost:8080/matches/search/bydate";
    let headers = new Headers();
+
    let body = JSON.stringify(dates);
    console.log(body);
     headers.append('Content-Type', 'application/json');

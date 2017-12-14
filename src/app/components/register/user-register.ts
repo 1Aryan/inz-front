@@ -20,7 +20,9 @@ import {Router} from '@angular/router';
 export class UserRegister implements OnInit{
 
 @ViewChild('userModal') public userModal:ModalDirective;
+@ViewChild('flashModal') public flashModal:ModalDirective;
 
+private flashText: string;
 private form: FormGroup;
 private user: User;
 id:number=null;
@@ -55,11 +57,13 @@ submit(){
 		.subscribe(
 			success=>{
 				this.hide();
-				this._flashMessagesService.show("Zarejestrowany, sprawdź e-mail aby aktywować konto!",{ cssClass: 'alert-success', timeout: 2000 });
 				this.setFormValidators();
+				this.flashText= "Rejestracja pomyślna, sprawdź e-mail!";
+				this.flashModal.show();
 			},
 			error=>{
-				this._flashMessagesService.show("E-mail zajęty!",{ cssClass: 'alert-danger', timeout: 2000 });
+				this.flashText= "E-mail zajęty.";
+				this.flashModal.show();
 			}
 			)
 	}

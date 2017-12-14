@@ -17,7 +17,10 @@ import {MatchService} from '../../../_services/match.service'
   styleUrls: ['./coach-profile.css']
 })
 export class CoachProfile  {
-@Output() onCreate: EventEmitter<any> = new EventEmitter<any>();
+
+@ViewChild('flashModal') public flashModal:ModalDirective;
+private flashText: string;
+
 private user: User;
 private form: FormGroup;
 private retrieveId:any;
@@ -81,11 +84,13 @@ getUser(){
 acceptMatchInv(id){
 this.matchService.acceptTeamMatch(id).subscribe(
 	success=>{
-		console.log("success accept Match");
 		this.getInvites();
+		this.flashText= "Mecz zaakceptowany!";
+		this.flashModal.show();
 	},
 	error=>{
-		console.log("fail accept match");
+		this.flashText= "Mecz już nie istnieje.";
+		this.flashModal.show();
 		this.getInvites();
 	}
 	)
@@ -134,21 +139,25 @@ removePlayer(id){
 	.subscribe(
 		success=>{
 			this.subscribeUser();
-			console.log("usunieto playera");
+			this.flashText= "Zawodnik usunięty z drużyny!";
+			this.flashModal.show();
 		},
 		
 		error=>{
-		console.log("nieusunieto playera");
+		this.flashText= "Błąd podczas usuwania zawodnika.";
+		this.flashModal.show();
 	})}
 
 editProfile(){
 this.userService.editProfile(this.user)
 .subscribe(
 	success=>{
-	console.log("udalo sie edytowac kołcza");
+	this.flashText= "Udało się edytować profil!";
+	this.flashModal.show();
 	},
 	error=>{
-	console.log("blad edycji kołcza");
+	this.flashText= "Błąd podczas edycji profilu.";
+	this.flashModal.show();
 	}
 	)}
 
@@ -157,11 +166,13 @@ editTeam(){
 	.subscribe(
 		success=>{
 		this.getUser();
-		console.log("Edytowano druzyne");
+		this.flashText= "Pomyślnie edytowałeś drużynę!";
+			this.flashModal.show();
 		
 		},
 		error=>{
-			console.log("NIEedytowano drużyny");
+			this.flashText= "Błąd podczas edycji, spróbuj później.";
+			this.flashModal.show();
 		}
 		)
 }
@@ -172,10 +183,12 @@ createTeam(){
 		success=>{
 			this.storageService.announceLogout();
 			this.storageService.announceLogin(success);
-			console.log("udalo sie stworzyc drużynę");
+			this.flashText= "Drużyna stworzona!";
+			this.flashModal.show();
 		},
 		error=>{
-			console.log("BLAD TWORZENIA DRUZYNY");
+			this.flashText= "Błąd podczas tworzenia drużyny.";
+			this.flashModal.show();
 		}
 		)
 	
@@ -185,10 +198,12 @@ retrievePassword(){
 this.userService.getPassword(this.retrieveId)
 .subscribe(
 	success=>{
-		console.log("udalo sie przypomniec haslo kołcza");
+		this.flashText= "Hasło zostało wysłane na twój adres e-mail!";
+		this.flashModal.show();
 	},
 	error=>{
-		console.log("juz przypominales haslo w przeciagu ostatniej godziny KOŁCZ !");
+		this.flashText= "Błąd, spróbuj później.";
+		this.flashModal.show();
 		
 	}
 	)

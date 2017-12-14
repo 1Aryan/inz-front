@@ -22,23 +22,24 @@
 		</div>
 	<div class="col-md-4 text-center"></div>
 	</div>
-	<hr/>
-	 <div class="text-center">
-		<h1> Aktualności</h1>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</div>
+	
 
 
 	<div bsModal #regulationsModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
 	mySmallModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog modal-lg">
 	<div class="modal-content">
 
 				<div class="panel panel-default" >
 					<div class="panel-heading">Regulamin</div>
 					<div class="panel-body">
-		 <p> 1. Nie będziesz miał bogów cudzych przede mną</p><hr/>
-		 <p> 2. Korzystaj z serwisu rozważnie </p>
+						
+		 <p><span style="color:red"> 1.</span> Nazwy i opisy drużyn nie mogą zawierać przekleństw, obraźliwych wyrazów.</p>
+		 <p><span style="color:red">  2.</span> Nazwy zawodników muszą być odzwierciedleniem realnych danych. </p>
+		 <p><span style="color:red">  3.</span> Dane hal muszą być odzwierciedleniem realnych danych. </p>
+		 <p><span style="color:red">  4.</span> Zachowaj kulturę we wszelkich wysłanych wiadomościach. </p>
+		<p><span style="color:red">  5.</span> Nie spamuj innych użytkowników niechcianymi zaproszeniami. </p>
+	
 			</div>
 	<div class="panel-footer">
 		<button type="submit" (click)="regulationsModal.hide()" class="btn btn-default">Zamknij</button>
@@ -61,7 +62,7 @@
 				<div class="panel panel-default" >
 					<div class="panel-heading">Kontakt z administracją</div>
 					<div class="panel-body">
-						<p style="font-size:130% ">Pamiętaj, że możesz miec 'aktywną' tylko 1 wiadomość!</p>
+						<p style="font-size:130% ">Pamiętaj, że możesz mieć 'aktywną' tylko 1 wiadomość!</p>
 			<input style="width:70%" [(ngModel)]="textMsg" placeholder="Max. 100 znaków...">
 
 			</div>
@@ -76,7 +77,15 @@
 	</div>
 
 	<add-hall #hallModal> </add-hall>
-
+	
+<div bsModal #flashModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<p style="text-align:center;font-size:150%"> {{flashText}} </p>
+</div>
+</div>
+</div>
 
 
 

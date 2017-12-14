@@ -17,13 +17,14 @@ private totalMatches:number;
 private dates:SearchDates;
 private dt1=null;
 private dt2=null;
+private searchCity: string;
 constructor(private searchService:SearchService){
 this.dates = new SearchDates();
 }
 
 ngOnInit(){
 this.getMatches();
-
+this.searchCity=null;
 }
 
 getMatches(){
@@ -43,7 +44,6 @@ getTeamDetails(id){
 	this.searchService.getTeamDetails(id)
 	.subscribe(
 		(success)=>{
-			console.log(success);
 			this.teamResults=success;
 			console.log("szczegoly druzyny success");
 		},
@@ -55,10 +55,10 @@ getTeamDetails(id){
 searchForMatches(){
 	this.dates.dateFrom = this.dt1;
 	this.dates.dateTo = this.dt2;
+	this.dates.city = this.searchCity;
 	this.searchService.getMatchesWithinDates(this.dates).subscribe(
 			success=>{
 		console.log("found matches");
-		console.log(success);
 		this.foundMatches=success;
 		this.totalMatches=this.searchService.totalUsers;
 	},

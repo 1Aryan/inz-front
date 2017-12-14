@@ -15,10 +15,11 @@
         <div class="panel-heading">Panel wyszukiwania</div>
         <div class="panel-body" ><span data-toggle="tooltip" data-placement="top" title="Wciśnij ENTER aby wyszukać!">
 <label>Data od-></label><br>
-<input type="date" [ngModel] ="dt1 | date:'yyyy-MM-dd'" (ngModelChange)="dt1 = $event" [value]="datee | date:'yyyy-MM-dd'"><br>
+<input (keyup.enter)="searchForMatches()" type="date" [ngModel] ="dt1 | date:'yyyy-MM-dd'" (ngModelChange)="dt1 = $event" [value]="datee | date:'yyyy-MM-dd'"><br>
 <label>Data ->do</label><br>
-<input type="date" [ngModel] ="dt2 | date:'yyyy-MM-dd'" (ngModelChange)="dt2 = $event" [value]="datee | date:'yyyy-MM-dd'"><br>
-   
+<input (keyup.enter)="searchForMatches()" type="date" [ngModel] ="dt2 | date:'yyyy-MM-dd'" (ngModelChange)="dt2 = $event" [value]="datee | date:'yyyy-MM-dd'"><br>
+<label>Miasto</label><br>
+<input (keyup.enter)="searchForMatches()" [(ngModel)]="searchCity" placeholder="np. Warszawa"><br>
 
 <button type="submit"  (click)="searchForMatches()" class="btn btn-default" >Szukaj</button></span>
         </div>

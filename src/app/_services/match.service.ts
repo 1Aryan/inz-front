@@ -13,7 +13,6 @@ export class MatchService {
     let url = "http://localhost:8080/match/invite";
     let body = JSON.stringify(matchInv);
     let headers = new Headers();
-    console.log( "Body of match inv :  "+body);
     headers.append('Content-Type', 'application/json');
     return this.http.post(url, body, {headers: headers})
       .map(response => response.json())
@@ -47,7 +46,6 @@ export class MatchService {
  public getMatches(id){
   	 let url = "http://localhost:8080/matches/search/"+id;
    let headers = new Headers();
-   console.log(url);
     headers.append('Content-Type', 'application/json');
     return this.http.get(url)
       .map(response => response.json());

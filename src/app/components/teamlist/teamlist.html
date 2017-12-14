@@ -113,7 +113,16 @@ mySmallModalLabel" aria-hidden="true">
    </option>
 </select>
 <br><hr/>
-<button class="btn btn-success" (click)="inviteToMatch()" [disabled]="matchInv.date==null || matchInv.refId==null || matchInv.hallId==null || matchInv.hour==null || matchInv.salary==null" >Stwórz</button>
+<button class="btn btn-success" (click)="inviteToMatch()" [disabled]="matchInv.date==null || matchInv.refId==null || matchInv.hallId==null || matchInv.hour==null || matchInv.salary==null">Stwórz</button>
 </div>
 </div>
 </div> 
+
+<div bsModal #flashModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<p style="text-align:center;font-size:150%"> {{flashText}} </p>
+</div>
+</div>
+</div>

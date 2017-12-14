@@ -26,6 +26,8 @@ import {Admin} from './components/profile/admin/admin';
 import {TeamList} from './components/teamlist/teamlist';
 import {MatchService} from './_services/match.service';
 import {MatchList} from './components/matchlist/matchlist'
+
+
 @NgModule({
   declarations: [
     AppComponent,

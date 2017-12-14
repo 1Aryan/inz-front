@@ -28,6 +28,7 @@
     "mydatepicker": "github:kekeh/mydatepicker",
     "ngx-bootstrap": "^1.9.3",
     "rxjs": "^5.4.2",
+    "underscore": "^1.8.3",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
@@ -36,6 +37,7 @@
     "@angular/language-service": "^4.2.4",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
+    "@types/jquery": "^3.2.16",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.2.0",
     "jasmine-core": "~2.6.2",

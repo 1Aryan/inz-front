@@ -80,7 +80,6 @@ mySmallModalLabel" aria-hidden="true">
         <div class="panel-heading"><h2>Sprawdź poprawność danych!</h2></div>
         <div class="panel-body">
    <p>Możesz edytować profil tylko raz w tygodniu!</p><hr/>
-   <p style="color:orange">W przypadku wprowadzenia nieprawidłowych danych możesz zostać pominięty przy zaproszeniach do drużyny!</p>
     </div>
 <div class="panel-footer">
    <button type="submit" (click)="confirmationModal.hide()" class="btn btn-default">Cofnij</button>
@@ -228,3 +227,12 @@ mySmallModalLabel" aria-hidden="true">
   </table></div>
 
 </div></div></div>
+
+<div bsModal #flashModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<p style="text-align:center;font-size:150%"> {{flashText}} </p>
+</div>
+</div>
+</div>
