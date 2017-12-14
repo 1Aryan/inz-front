@@ -15,7 +15,6 @@ export class AdminService {
     let url = "http://localhost:8080/msg";
     let body = JSON.stringify(msg);
     let headers = new Headers();
-    console.log(body);
     headers.append('Content-Type', 'application/json');
     return this.http.post(url, body, {headers: headers})
       .map((res) => { 
@@ -56,7 +55,6 @@ public deleteMsg(msg: MsgFromAdmin){
     
     let url = "http://localhost:8080/delete/msg";
     let body = JSON.stringify(msg);
-    console.log(body);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(url, body, {headers: headers})

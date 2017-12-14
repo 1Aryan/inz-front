@@ -16,7 +16,9 @@ import {MsgFromAdmin} from '../../../_models/MsgFromAdmin';
   styleUrls: ['./admin.css']
 })
 export class Admin implements OnInit {
+@ViewChild('flashModal') public flashModal:ModalDirective;
 
+private flashText: string;
 private adminMsg:any;
 private answer:MsgFromAdmin;
 private MsgFromAdmin:any;
@@ -42,7 +44,7 @@ getMsgs(){
 	.subscribe(
 		success=>{
 			this.results=success;
-			console.log("doszły wiadomości od userów dla admina");
+			console.log("Wiadomości od userów doszły");
 		}
 		)
 }
@@ -53,10 +55,12 @@ this.adminService.answerMsg(this.answer)
 	.subscribe(
 			success=>{
 				this.getMsgs();
-				console.log("wyslano odpowiedz na wiadomosc od usera");
+				this.flashText= "Wysłano odpowiedź!";
+				this.flashModal.show();
 			},
 			error=>{
-					console.log("NIEwyslano odpowiedz na wiadomosc od usera");
+				this.flashText= "Błąd podczas wysyłania odpowiedzi!";
+				this.flashModal.show();
 			}
 		)
 
@@ -80,10 +84,12 @@ this.adminService.activateHall(id)
 .subscribe(
 	success=>{
 		this.getHalls();
-		console.log("aktywowano halę")
+		this.flashText= "Hala aktywna!";
+		this.flashModal.show();
 	},
 	error=>{
-		console.log("aktywacja hali FAIL")
+		this.flashText= "Błąd podczas aktywacji hali.";
+		this.flashModal.show();
 	}
 	)
 }

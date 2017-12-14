@@ -44,6 +44,8 @@ export class UserService {
       .map(response => response.json());
   }
 
+
+
   public editSalary(id,salary) {
     let url = "http://localhost:8080/user/salary/" + id +"/"+ salary;
     let headers = new Headers();
@@ -82,7 +84,6 @@ export class UserService {
   let url = "http://localhost:8080/invite/team";
     let body = JSON.stringify(teamInvitation);
     let headers = new Headers();
-    console.log(body);
     headers.append('Content-Type', 'application/json');
     return this.http.post(url, body, {headers: headers})
       .map(response => response.json())
@@ -99,7 +100,6 @@ export class UserService {
   public getInvitations(id){
      let url = "http://localhost:8080/invitation/player/" + id;
     let headers = new Headers();
-
     headers.append('Content-Type', 'application/json');
     return this.http.get(url)
       .map(response => response.json());

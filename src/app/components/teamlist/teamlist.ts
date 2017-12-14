@@ -1,14 +1,14 @@
 import { Component,ViewChild, OnInit} from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import 'rxjs/add/operator/map';
 import {StorageService} from '../../_services/storage.service';
 import {SearchService} from '../../_services/search.service';
 import {Team} from '../../_models/Team';
 import {HallService} from '../../_services/hall.service';
 import {Hall} from '../../_models/Hall';
 import {SearchUser} from '../../_models/SearchUser';
-
+import {MatchInvitation} from '../../_models/MatchInvitation';
+import {MatchService} from '../../_services/match.service';
 @Component({
   selector: 'team-list',
   templateUrl: './teamlist.html',
@@ -16,7 +16,9 @@ import {SearchUser} from '../../_models/SearchUser';
 })
 
 export class TeamList implements OnInit{
+@ViewChild('flashModal') public flashModal:ModalDirective;
 
+private flashText: string;
 private searchTeam: Team;
 private subscribedAccount;
 private totalTeams;
@@ -30,18 +32,37 @@ private totalHalls:number;
 private foundHalls:any[];
 private foundRefs:any[];
 private oppositeTeam;
+private matchInv: MatchInvitation;
+private id:number;
+private salary:number;
+hours = [ 
+    {id: 0, name: "08:00"}, 
+    {id: 1, name: "11:00"},
+    {id: 2, name: "14:00"},
+    {id: 3, name: "17:00"},
+    {id: 4, name: "20:00"}
+    ];
 
-constructor(private _searchService: SearchService,private hallService: HallService, private storageService: StorageService){
+constructor(private _searchService: SearchService,private matchService:MatchService, private hallService: HallService, private storageService: StorageService){
 this.searchTeam = new Team();
 this.searchDummyHall = new Hall();
 this.searchDummyRefree = new SearchUser();
+this.matchInv = new MatchInvitation();
+}
 
+saveRole(){
+ this.id = +this.id;
+ this.matchInv.setHour(this.hours[this.id].name);
 }
 
 ngOnInit(){
 	this.searchForTeams();
 	this.subscribeUser();
-	
+
+}
+
+saveSalary(salary){
+	this.matchInv.setSalary(salary);
 }
 
 subscribeUser(){
@@ -49,9 +70,24 @@ subscribeUser(){
 		(account) => {
 			if(account != null){
 			this.subscribedAccount=account;
-			console.log(this.subscribedAccount.team.id);
 			console.log("teamlist account subscribed");
 		}}
+		)
+}
+
+inviteToMatch(){
+	this.matchInv.setTeamB(this.oppositeTeam.id);
+	this.matchInv.setTeamA(this.subscribedAccount.team.id);
+	console.log(this.matchInv);
+	this.matchService.inviteToMatch(this.matchInv).subscribe(
+		success=>{
+			this.flashText = "Drużyna zaproszona!";
+		this.flashModal.show();
+		},
+		error=>{
+			this.flashText = "Błąd";
+		this.flashModal.show();
+		}
 		)
 }
 
@@ -61,7 +97,6 @@ this._searchService.searchForTeams(this.searchTeam)
 		(success)=>{
 			this.totalTeams = this._searchService.totalUsers;
 			this.results = success;
-			console.log(this.results);
 			console.log("teams searched success");
 		},
 		(error)=>{
@@ -78,7 +113,6 @@ getTeamDetails(id){
 			this.teamresults=success;
 			this.oppositeTeamId=this.teamresults[0].teamDAO.id;
 			this.oppositeTeam=this.teamresults[0].teamDAO;
-			
 			console.log("szczegoly druzyny success");
 		},
 		(error)=>{
@@ -93,7 +127,6 @@ this.hallService.searchForHalls(this.searchDummyHall)
 		(success)=>{
 			this.totalHalls = this.hallService.totalHalls;
 			this.foundHalls = success;
-		
 			console.log("wyszukano HALE");
 		},
 		(error)=>{
@@ -108,7 +141,6 @@ this._searchService.searchForUsers(this.searchDummyRefree)
 	.subscribe(
 		(success)=>{
 			this.foundRefs = success
-			console.log(this.foundRefs);
 			console.log("users searched success");
 		},
 		(error)=>{

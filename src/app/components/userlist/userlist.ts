@@ -16,13 +16,15 @@ import {UserService} from '../../_services/user.service';
 
 
 export class UserList implements OnInit{
- id:any;
- role:any;
- results: any[]
- totalUsers: any;
- subscribedAccount:any;
+ 
+ @ViewChild('flashModal') public flashModal:ModalDirective;
 
-
+ private id:any;
+ private role:any;
+ private results: any[]
+ private totalUsers: any;
+ private subscribedAccount:any;
+ private flashText: string;
  private searchUser: SearchUser;
  private teamInvitation: TeamInvitation;
   roles = [
@@ -52,14 +54,12 @@ searchForUsers(){
 this._searchService.searchForUsers(this.searchUser)
 	.subscribe(
 		(success)=>{
-			console.log(success);
 			this.totalUsers = this._searchService.totalUsers;
 			this.results = success;
-
-			console.log("users searched success");
+			console.log("Użytkownicy wyszukani");
 		},
 		(error)=>{
-			console.log("failed searching userow");
+			console.log("Blad podczas szukania użytkowników");
 		}
 		)
 
@@ -70,10 +70,13 @@ this.teamInvitation.setUserEmail(email);
 this.userService.inviteToTeam(this.teamInvitation)
 	.subscribe(
 			success=>{
-				console.log("inviting to team SUCCESS")
+				this.flashText = "Zawodnik zaproszony!";
+				this.flashModal.show();
 			},
 			error=>{
-				console.log("Failed to invite to team ! (or you just already invited that guy)")
+			this.flashText = "Nie udało się zaprosić zawodnika.";
+			this.flashModal.show();
+					
 			}
 		)
 
@@ -83,7 +86,6 @@ subscribeUser(){
 	StorageService.LoginStream$.subscribe(
 		(account) => {
 			if(account != null){
-			console.log(account);
 			this.subscribedAccount=account;
 			this.teamInvitation.setTeamName(account.team.name);
 			console.log("userlist account subscribed");

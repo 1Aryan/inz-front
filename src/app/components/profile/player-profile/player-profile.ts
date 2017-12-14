@@ -8,13 +8,16 @@ import {UserService} from '../../../_services/user.service'
 import { phoneValidator } from '../../../validators/phone-validator';
 import { mailValidator } from '../../../validators/mail-validator';
 import {SearchService} from '../../../_services/search.service'
+import {MatchService} from '../../../_services/match.service'
+
 @Component({
   selector: 'player-profile',
   templateUrl: './player-profile.html',
   styleUrls: ['./player-profile.css']
 })
 export class PlayerProfile implements OnInit {
-
+@ViewChild('flashModal') public flashModal:ModalDirective;
+private flashText: string;
 private teamresults:any[];
 private user: User;
 private form: FormGroup;
@@ -22,9 +25,10 @@ private retrieveId:any;
 private invitationResults:any[];
 private userTeam: boolean=false;
 private subscribedTeam:any;
+private foundMatches:any[];
 
 
-constructor(private storageService: StorageService,private fb: FormBuilder,private searchService:SearchService,private userService: UserService) 
+constructor(private storageService: StorageService,private matchService:MatchService,private fb: FormBuilder,private searchService:SearchService,private userService: UserService) 
 {
 this.user = new User();
 }
@@ -34,16 +38,15 @@ ngOnInit(){
 	this.subscribeUser();
 	this.setFormValidators();
 	this.getInvitations();
+	if(this.subscribedTeam!=null) this.getMatches();
 }
 
 subscribeUser(){
 	StorageService.LoginStream$.subscribe(
 		(account) => {
 			if(account != null){
-				if(account.team!=null) this.userTeam=true;
-				console.log(account);
+			if(account.team!=null) this.userTeam=true;
 			this.retrieveId=account.id;
-
 			this.subscribedTeam=account.team;
 			if(account.team!=null){
 			this.getTeamDetails(this.subscribedTeam.id);
@@ -63,14 +66,25 @@ getInvitations(){
 		.subscribe(
 				success=>{
 						this.invitationResults=success;
-						console.log(this.invitationResults);
-						console.log("wyszukano zaproszenia do drużyn zawodnika");
+						console.log("wyszukano zaproszenia do drużyn");
 				},
 				error=>{
 						console.log("NIEwyszukano zaproszen do drużyn");
 				}
 			)
 
+}
+
+getMatches(){
+	
+	this.matchService.getMatches(this.subscribedTeam.id).subscribe(
+		success=>{
+			this.foundMatches = success;
+		},
+		error=>{
+			console.log("matches not found properly");
+		}
+		)
 }
 
 getTeamDetails(id){
@@ -97,12 +111,12 @@ editProfile(){
 this.userService.editProfile(this.user)
 .subscribe(
 	success=>{
-
-		console.log("udalo sie edytowac playera");
+		this.flashText= "Udało się edytować profil!";
+			this.flashModal.show();
 	},
 	error=>{
-		console.log("blad edycji playera");
-		
+		this.flashText= "Błąd podczas edycji profilu.";
+		this.flashModal.show();
 	}
 	)}
 
@@ -111,11 +125,12 @@ this.userService.acceptInvitation(this.retrieveId,id)
 	.subscribe(
 		success=>{
 			this.getUserCredentials();
-
-			console.log("Zaakceptowano zaproszenie");
+			this.flashText= "Akceptowano zaproszenie, witaj w drużynie!";
+			this.flashModal.show();
 		},
 		error=>{
-			console.log("Blad w akceptacji zaproszenie");
+			this.flashText= "Błąd podczas akceptacji zaproszenia.";
+			this.flashModal.show();
 		}
 		)
 }
@@ -133,15 +148,20 @@ this.userService.denyInvitation(this.retrieveId,id)
 		)
 }
 leaveTeam(){
+
 	this.userService.removePlayerFromTeam(this.retrieveId).subscribe(
 		success=>{
+
+			this.getMatches();
 			this.getUserCredentials();
 			this.subscribeUser();
 			this.getInvitations();
-			console.log("Odszedles z teamu");
+			this.flashText= "Pomyślnie odszedłeś z drużyny!";
+			this.flashModal.show();
 		},
 		error=>{
-			console.log("Nie udało się odejsc z teamu");
+			this.flashText= "Nie udało się odejść z drużyny.";
+			this.flashModal.show();
 		}		
 		)
 }
@@ -149,12 +169,12 @@ retrievePassword(){
 this.userService.getPassword(this.retrieveId)
 .subscribe(
 	success=>{
-
-		console.log("udalo sie przypomniec haslo playera");
+			this.flashText= "Hasło zostało wysłane na twój adres e-mail!";
+			this.flashModal.show();
 	},
 	error=>{
-		console.log("juz przypominales haslo w przeciagu ostatniej godziny PLAYER!");
-		
+		this.flashText= "Błąd, spróbuj później.";
+		this.flashModal.show();
 	}
 	)
 }

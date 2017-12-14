@@ -17,10 +17,10 @@ import {Router} from '@angular/router';
 export class AddHall implements OnInit{
 
 @ViewChild('hallModal') public hallModal:ModalDirective;
-
+@ViewChild('flashModal') public flashModal:ModalDirective;
 private form: FormGroup;
 private hall:Hall;
-
+private flashText: string;
 constructor(private fb: FormBuilder,private hallService: HallService,private _flashMessagesService: FlashMessagesService,private router:Router){
 	this.hall = new Hall();
 	}
@@ -37,11 +37,12 @@ addHall(){
 		.subscribe(
 			success=>{
 				this.hide();
-				console.log("hala dodana, czeka na zatwierdzenie!")
-				this.setFormValidators();  //potrzebne?
+				this.flashText = "Hala dodana, oczekuje na potwierdzenie"
+				this.flashModal.show();
 			},
 			error=>{
-				console.log("ta hala już istnieje lub błąd !")
+				this.flashText = "Błąd podczas dodawania hali!"
+				this.flashModal.show();
 			}
 			)
 	

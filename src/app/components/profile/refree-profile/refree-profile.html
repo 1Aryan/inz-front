@@ -38,17 +38,57 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 "></div>
-  <!-- 	 <div class="panel panel-default" >
-        <div class="panel-heading">Edytuj wynagrodzenie!</div>
-        <div class="panel-body">
-<p> Edytuj wynagrodzenie aby dokończyć tworzenie profilu !</p>
-  	<button type="submit" (click)="salaryModal.show()" class="btn btn-danger btn-lg" >Edytuj wynagrodzenie</button></div>
-</div></div></div> -->
-  <div class="col-md-4 ">wiecej czegos</div>
+  <div class="col-md-4 ">
+ 
+  <div class="panel panel-default" > 
+    <div class="panel-heading">Zaproszenia do meczów</div>
+    </div>
+    
+    <div class="panel panel-default"  *ngFor="let matchInvitation of matchInvitations" >  
+     <div class="panel-body"  >
 
-   <div class="col-md-2 ">jeszcze wiecej czegos</div>
-  
+  <span style="color:blue">Nazwa drużyny A :</span> {{matchInvitation.teamA.name}}<br>
+  <span style="color:blue">Opis :</span> {{matchInvitation.teamA.description}}<br>
+  <span style="color:blue">Miasto :</span> {{matchInvitation.teamA.city}}<br>
+  <span style="color:violet">Nazwa drużyny B :</span> {{matchInvitation.teamB.name}}<br>
+  <span style="color:violet">Opis :</span> {{matchInvitation.teamB.description}}<br>
+  <span style="color:violet">Miasto :</span> {{matchInvitation.teamB.city}}<br>
+  <span style="color:orange">Hala :</span> {{matchInvitation.hall.city}}, {{matchInvitation.hall.adress}} {{matchInvitation.hall.number}} <br>
+  <span style="color:green">Data :</span> {{matchInvitation.date}} <br>
+
+  <span style="color:red">Proponowana zapłata :</span> {{matchInvitation.salary}}zł<br>
+
+
+   <button type="submit"  class="btn btn-default" (click)="acceptMatchInv(matchInvitation.id);getMatches()">Przyjmij</button>
+   <button type="submit"  class="btn btn-default" (click)="denyMatchInv(matchInvitation.id)">Odrzuć</button>
+</div>
+</div>
+
+</div>
+
+  <div class="col-md-5 ">
+    
+ <div class="panel panel-default" > 
+    <div class="panel-heading">Aktywne mecze</div>
+    </div>
+
+    <div class="panel panel-default"  *ngFor="let foundMatch of foundMatches" >  
+    <div class="panel-heading">
+   
+     <div class="panel-body"  >
+
+  <span style="color:red">Gospodarz :</span> {{foundMatch.teamA.name}} <button class="btn btn-default" (click)="getTeamDetails(foundMatch.teamA.id);detailsModal.show()"> Szczegóły </button><br>
+  <span style="color:red">Gość :</span> {{foundMatch.teamB.name}}<button class="btn btn-default" (click)="getTeamDetails(foundMatch.teamB.id);detailsModal.show()"> Szczegóły </button><br>
+  <span style="color:blue">Sędzia :</span> {{foundMatch.ref.name}} {{foundMatch.ref.lastname}}<br>
+  <span style="color:orange">Hala :</span> {{foundMatch.hall.city}}, {{foundMatch.hall.adress}} {{foundMatch.hall.number}} <br>
+  <span style="color:green">Data :</span> {{foundMatch.date}} <br>
+  <span style="color:orange">Gaża :</span> {{foundMatch.salary}}zł<br> 
+</div>
+</div>
+</div>
+
+</div>
+</div>
 
 
 
@@ -82,7 +122,7 @@ mySmallModalLabel" aria-hidden="true">
       <div class="panel panel-default" >
         <div class="panel-heading"><h2>Wpisz e-mail</h2></div>
         <div class="panel-body">
- <p>Możesz przypomnieć hasło tylko raz na godzinę!</p>
+ <p style="color:red;font-size:150%">Możesz przypomnieć hasło tylko raz na godzinę!</p>
 
     </div>
 <div class="panel-footer">
@@ -95,24 +135,42 @@ mySmallModalLabel" aria-hidden="true">
 </div>
 </div>
 
-<!-- <div bsModal #salaryModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+<div bsModal #detailsModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
+mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-body">  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Rola</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Rok urodzenia</th>
+        <th>Telefon</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let teamresult of teamresults">
+      <td>{{teamresult.role}}</td>
+      <td>{{teamresult.name}}</td>
+      <td>{{teamresult.lastname}}</td>
+      <td>{{teamresult.year}}</td>
+      <td>{{teamresult.phone}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+</div>
+</div>
+</div>
+
+<div bsModal #flashModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
 mySmallModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm">
 <div class="modal-content">
-
-      <div class="panel panel-default" >
-        <div class="panel-heading"><h1>Podaj wynagrodzenie za mecz aby być widocznym dla innych!</h1></div>
-        <div class="panel-body">
-        	 <p style="color:red">Sprawdź poprawność, możesz zmienić wynagrodzenie tylko raz na 7 dni!</p>
-
-	<input  [(ngModel)]="salary" placeholder="np. 100">
-    </div>
-<div class="panel-footer">
-   <button type="submit" (click)="salaryModal.hide()" class="btn btn-default">Cofnij</button>
-  <button type="submit" (click)="editSalary();salaryModal.hide()" class="btn btn-default">Wyślij</button>
- 
+<p style="text-align:center;font-size:150%"> {{flashText}} </p>
 </div>
 </div>
 </div>
-</div>
-</div> -->

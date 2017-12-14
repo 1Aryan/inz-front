@@ -17,9 +17,10 @@ export class Authentication {
 
 @ViewChild('authModal') public authModal:ModalDirective;
 @ViewChild('activateModal') public activateModal:ModalDirective;
-
+@ViewChild('flashModal') public flashModal:ModalDirective;
 private user : UserLogin;
 private userLogged:any;
+private flashText: string;
 
 constructor(private authService : AuthService,private _flashMessagesService: FlashMessagesService,private _storageService: StorageService,private router:Router){
 this.user = new UserLogin();
@@ -40,8 +41,8 @@ submit(){
 this.authService.login(this.user)
 	.subscribe(
 		(success) => {
-			console.log("zalogowano !!");
-			
+	
+			this.flashText= "Zalogowano!";
 			this.authService.getUser(success.id).subscribe((successLoggedUser) =>{
 			this.hide();
 			this.userLogged= new User();
@@ -49,13 +50,17 @@ this.authService.login(this.user)
 			console.log("mam usera po zalogowaniu !!");
 			localStorage.setItem('token', success.token);  //potrzebny token?
 			this._storageService.announceLogin(this.userLogged);
+			this.flashModal.show();
 		},
 		(error) => {
-			console.log("NIEZAalogowano !!");
+			this.flashText= "Błąd podczas logowania!";
+			this.flashModal.show();
+			
 		})
 		},
 		(errorLoggedUser) => {
-			console.log("NIEZAalogowano !!");
+			this.flashText= "Błąd podczas logowania!";
+			this.flashModal.show();
 			})
 		}
 

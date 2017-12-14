@@ -17,13 +17,14 @@ export class Welcome implements OnInit,OnDestroy {
 @ViewChild('hallModal') public hallModal:AddHall;
 @ViewChild('contactModal') public contactModal:ModalDirective;
 @ViewChild('regulationsModal') public regulationsModal:ModalDirective;
-
+@ViewChild('flashModal') public flashModal:ModalDirective;
 
 private profileButton: boolean;
 private userEmail: string;
 private textMsg: string;
 private userId: number;
 private msg: MsgToAdmin;
+private flashText: string;
 
 constructor(private storageService: StorageService,private adminService : AdminService) 
 	{
@@ -58,10 +59,12 @@ this.msg.setMsg(this.textMsg);
 this.adminService.contactAdmin(this.msg)
 .subscribe(
 	success=>{
-		console.log("succesfuly contacted admin")
+		this.flashText = "Wiadomość wysłana!";
+		this.flashModal.show();
 	},
 	error=>{
-		console.log("unsuccessfuly contated admin")	
+		this.flashText = "Wiadomość nie została wysłana";
+		this.flashModal.show();
 	}
 	)
 }
