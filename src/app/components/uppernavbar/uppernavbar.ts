@@ -18,6 +18,9 @@ private profileButton: boolean=false;
 private userEmail: string;
 
 @ViewChild('registerModal') public registerModal:UserRegister;
+@ViewChild('flashModal') public flashModal:ModalDirective;
+
+private flashText: string;
 
 constructor(private viewContainerRef: ViewContainerRef,private storageService: StorageService,private router: Router){}
 
@@ -29,6 +32,8 @@ logOut(){
 	this.storageService.announceLogout();
 	this.profileButton = false;
 	this.router.navigate(['/']);
+	this.flashText = "Wylogowano";
+				this.flashModal.show();
 }
 
 subscribeUser(){
