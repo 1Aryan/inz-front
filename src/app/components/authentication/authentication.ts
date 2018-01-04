@@ -47,19 +47,18 @@ this.authService.login(this.user)
 			this.hide();
 			this.userLogged= new User();
 			this.userLogged = successLoggedUser;
-			console.log("mam usera po zalogowaniu !!");
 			localStorage.setItem('token', success.token);  //potrzebny token?
 			this._storageService.announceLogin(this.userLogged);
 			this.flashModal.show();
 		},
 		(error) => {
-			this.flashText= "Błąd podczas logowania!";
+			this.flashText= "Błędne hasło lub e-mail!";
 			this.flashModal.show();
 			
 		})
 		},
 		(errorLoggedUser) => {
-			this.flashText= "Błąd podczas logowania!";
+			this.flashText= "Błędne hasło lub e-mail!";
 			this.flashModal.show();
 			})
 		}
@@ -69,11 +68,13 @@ activate(email: string){
 		.subscribe(
 		(success)=>{
 			this.router.navigate(['']);
-			console.log("WYSŁANY LINK AKTYWACYJNY !!");
+			this.flashText= "Link aktywacyjny wysłany!";
+			this.flashModal.show();
 			this.hideActivateModal();
 		},
 		(error)=>{
-			console.log("Email nie istnieje w bazie do aktywacji !!");
+			this.flashText= "E-mail nie istnieje w bazie!";
+			this.flashModal.show();
 		}
 	)}
 
