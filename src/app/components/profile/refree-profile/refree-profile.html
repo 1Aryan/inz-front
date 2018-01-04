@@ -30,7 +30,6 @@
 </div>
 
 <button type="submit" [disabled]="!form.valid" (click)="confirmationModal.show()" class="btn btn-default" >Edytuj</button>
-<button type="submit" (click)="passwordModal.show()" class="btn btn-default" >Przypomnij hasło</button>
 
 </form>
 
@@ -114,26 +113,7 @@ mySmallModalLabel" aria-hidden="true">
 </div>
 
 
-<div bsModal #passwordModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
-mySmallModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm">
-<div class="modal-content">
 
-      <div class="panel panel-default" >
-        <div class="panel-heading"><h2>Wpisz e-mail</h2></div>
-        <div class="panel-body">
- <p style="color:red;font-size:150%">Możesz przypomnieć hasło tylko raz na godzinę!</p>
-
-    </div>
-<div class="panel-footer">
-   <button type="submit" (click)="passwordModal.hide()" class="btn btn-default">Cofnij</button>
-  <button type="submit" (click)="retrievePassword();passwordModal.hide()" class="btn btn-default">Przypomnij</button>
- 
-</div>
-</div>
-</div>
-</div>
-</div>
 
 <div bsModal #detailsModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
 mySmallModalLabel" aria-hidden="true">

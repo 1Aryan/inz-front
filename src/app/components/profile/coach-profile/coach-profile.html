@@ -7,7 +7,6 @@
         <div class="panel-body">
    
   <button type="submit" *ngIf="subscribedTeam==null" (click)="createTeamModal.show()" class="btn btn-default">Stwórz drużynę</button>
-  <button type="submit" (click)="passwordModal.show()" class="btn btn-default" >Przypomnij hasło</button><br>
   <button type="submit" (click)="editModal.show()" class="btn btn-default" >Edytuj dane</button><br>
   <button type="submit" *ngIf="subscribedTeam!=null" (click)="editTeamModal.show()" class="btn btn-default">Edytuj drużynę</button><br>
   <button type="submit" *ngIf="subscribedTeam!=null" (click)="teamModal.show()" class="btn btn-default">Szczegóły drużyny</button><br>
@@ -86,25 +85,7 @@ mySmallModalLabel" aria-hidden="true">
   <button type="submit" (click)="editProfile();confirmationModal.hide()" class="btn btn-default">Edytuj!</button>
 </div></div></div></div></div>
 
-<div bsModal #passwordModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
-mySmallModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm">
-<div class="modal-content">
 
-      <div class="panel panel-default" >
-        <div class="panel-heading"><h2>Wpisz e-mail</h2></div>
-        <div class="panel-body">
- <p>Możesz przypomnieć hasło tylko raz na godzinę!</p>
-
-</div>
-<div class="panel-footer">
-   <button type="submit" (click)="passwordModal.hide()" class="btn btn-default">Cofnij</button>
-  <button type="submit" (click)="retrievePassword();passwordModal.hide()" class="btn btn-default">Zrób to!</button>
-</div>
-</div>
-</div>
-</div>
-</div>
 
 
 <div bsModal #createTeamModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="
